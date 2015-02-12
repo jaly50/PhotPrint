@@ -1,88 +1,93 @@
+<!DOCTYPE html>
 <html>
   <head>
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript">
-      google.load("visualization", "1", {packages:["corechart"]});
-      google.setOnLoadCallback(drawChart);
-      function drawChart() {
-
-        var data = google.visualization.arrayToDataTable([
-          ['Task', 'Hours per Day'],
-          ['Friend',     11],
-          ['Travel',      2],
-          ['Family',  2],
-          ['Myself', 2],
-          ['Others',    7]
-        ]);
-
-        var options = {
-          title: 'My Photo Category'
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-<<<<<<< Updated upstream
-<!-- Page Content -->
-<!-- This is a very simple parallax effect achieved by simple CSS 3 multiple backgrounds, made by http://twitter.com/msurguy -->
-
-<div class="container">
-<div class="container">
-<div class="container">
-  <h2>${customer.firstname} ${customer.lastname}'s Transaction History</h2>
-    </br>
-  
-  <table class="table table-bordered">
-    <thead> 
-    <tr>
-        <th><p align = left>Date</th>
-        <th><p align = left>Operation</th>
-        <th><p align = left>Fund Name</th>
-        <th><p align = left>Fund Ticker</th>
-        <th><p align = right>Shares</th>
-        <th><p align = right>Price</th>
-        <th><p align = right>Amount</th>
-      </tr>      
-    </thead>
-    
-    <tbody>
-    	<c:forEach var="transactionInfo" items="${transactionInfo}">    
-    	<tr> 
-	    <td><p align = left><c:out value = '${transactionInfo.date}' escapeXml='true' /></td>
-        <td><p align = left><c:out value = '${transactionInfo.operation}' escapeXml='true' /></td>
-        <td><p align = left><c:out value = '${transactionInfo.name}' escapeXml='true' /></td>
-        <td><p align = left><c:out value = '${transactionInfo.symbol}' escapeXml='true' /></td>
-        <td><p align = right><c:out value = '${transactionInfo.shares}' escapeXml='true' /></td>
-        <td><p align = right><c:out value = '${transactionInfo.price}' escapeXml='true' /></td>
-        <td><p align = right><c:out value = '${transactionInfo.amount}' escapeXml='true' /></td>
-	</tr>			    
-	</c:forEach>   	 
-    </tbody>
-  </table>
-</div>
-</div>
-   
-    <br />
-    <br />
-    <br />
-</div>
-
- 
-<jsp:include page="template-bottom.jsp" />
-=======
-        chart.draw(data, options);
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Complex icons</title>
+    <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
       }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+    <script>
+// The following example creates complex markers to indicate beaches near
+// Sydney, NSW, Australia. Note that the anchor is set to
+// (0,32) to correspond to the base of the flagpole.
+
+function initialize() {
+  var mapOptions = {
+    zoom: 10,
+    center: new google.maps.LatLng(-33.9, 151.2)
+  }
+  var map = new google.maps.Map(document.getElementById('map-canvas'),
+                                mapOptions);
+
+  setMarkers(map, beaches);
+}
+
+/**
+ * Data for the markers consisting of a name, a LatLng and a zIndex for
+ * the order in which these markers should display on top of each
+ * other.
+ */
+var beaches = [
+  ['Bondi Beach', -33.890542, 151.274856, 4],
+  ['Coogee Beach', -33.923036, 151.259052, 5],
+  ['Cronulla Beach', -34.028249, 151.157507, 3],
+  ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
+  ['Maroubra Beach', -33.950198, 151.259302, 1]
+];
+
+function setMarkers(map, locations) {
+  // Add markers to the map
+
+  // Marker sizes are expressed as a Size of X,Y
+  // where the origin of the image (0,0) is located
+  // in the top left of the image.
+
+  // Origins, anchor positions and coordinates of the marker
+  // increase in the X direction to the right and in
+  // the Y direction down.
+  var image = {
+    url: 'images/beachflag.png',
+    // This marker is 20 pixels wide by 32 pixels tall.
+    size: new google.maps.Size(20, 32),
+    // The origin for this image is 0,0.
+    origin: new google.maps.Point(0,0),
+    // The anchor for this image is the base of the flagpole at 0,32.
+    anchor: new google.maps.Point(0, 32)
+  };
+  // Shapes define the clickable region of the icon.
+  // The type defines an HTML &lt;area&gt; element 'poly' which
+  // traces out a polygon as a series of X,Y points. The final
+  // coordinate closes the poly by connecting to the first
+  // coordinate.
+  var shape = {
+      coords: [1, 1, 1, 20, 18, 20, 18 , 1],
+      type: 'poly'
+  };
+  for (var i = 0; i < locations.length; i++) {
+    var beach = locations[i];
+    var myLatLng = new google.maps.LatLng(beach[1], beach[2]);
+    var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+        icon: image,
+        shape: shape,
+        title: beach[0],
+        zIndex: beach[3]
+    });
+  }
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
     </script>
   </head>
   <body>
-  	<h2>2014-12-05, in NewYork, I took 100 photos.
-  	55 myself.
-  	10 friends.
-  	20 others.
-  	Happy!
-  	<a href= clickPhotoHistory.do>View Photos</a>	
-  	<a href= clickPhotoHistory.do>Back to previous page</a>	
-  	</h2>
-    <div id="piechart" style="width: 900px; height: 500px;"></div>
+    <div id="map-canvas"></div>
   </body>
 </html>
->>>>>>> Stashed changes
