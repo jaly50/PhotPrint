@@ -33,7 +33,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import formbeans.ShowWrapper;
-import databeans.Wrapper;
 import databeans.WrapperTable;
 
 /**
