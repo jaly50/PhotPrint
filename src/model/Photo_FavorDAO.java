@@ -7,7 +7,6 @@ import org.genericdao.MatchArg;
 import org.genericdao.RollbackException;
 
 import databeans.Photo_Favor;
-import databeans.Position;
 
 public class Photo_FavorDAO extends GenericDAO<Photo_Favor> {
 
