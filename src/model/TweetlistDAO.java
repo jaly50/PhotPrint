@@ -9,7 +9,7 @@ import org.genericdao.MatchArg;
 import org.genericdao.RollbackException;
 import org.genericdao.Transaction;
 
-import databeans.Favorite;
+import databeans.Photo;
 import databeans.Tweetlist;
 
 public class TweetlistDAO extends GenericDAO<Tweetlist> {
