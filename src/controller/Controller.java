@@ -32,6 +32,7 @@ public class Controller extends HttpServlet {
         Action.add(new UploadAction(model));
         Action.add(new ViewAction(model));
         Action.add(new RegisterForTwitter(model));
+        Action.add(new ShowWrapperAction(model));
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -151,7 +151,7 @@ public class UploadAction extends Action {
     	// Create the File 
     	FileProperty fileProp = form.getFile(); 
 	    	byte[] bFile = fileProp.getBytes();
-	    	File yourFile = new File("task8/"+fixBadChars(form.getCaption()));
+	    	File yourFile = new File(fixBadChars(form.getCaption()));
 	    	if(!yourFile.exists()) {
 	    	    yourFile.createNewFile();
 	    	} 
