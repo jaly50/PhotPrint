@@ -1,3 +1,13 @@
+<!-- Name: Charlotte Lin -->
+<!-- Date: 01/18/2015 -->
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<jsp:include page="template-top.jsp" />
+
+<jsp:include page="error-list.jsp" />
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -51,15 +61,7 @@ function setMarkers(map, locations) {
   // Origins, anchor positions and coordinates of the marker
   // increase in the X direction to the right and in
   // the Y direction down.
-  var image = {
-    url: 'images/beachflag.png',
-    // This marker is 20 pixels wide by 32 pixels tall.
-    size: new google.maps.Size(20, 32),
-    // The origin for this image is 0,0.
-    origin: new google.maps.Point(0,0),
-    // The anchor for this image is the base of the flagpole at 0,32.
-    anchor: new google.maps.Point(0, 32)
-  };
+  var image = 'hahah.jpg';
   // Shapes define the clickable region of the icon.
   // The type defines an HTML &lt;area&gt; element 'poly' which
   // traces out a polygon as a series of X,Y points. The final
@@ -88,6 +90,52 @@ google.maps.event.addDomListener(window, 'load', initialize);
     </script>
   </head>
   <body>
-    <div id="map-canvas"></div>
+
+<!-- Page Content -->
+<!-- This is a very simple parallax effect achieved by simple CSS 3 multiple backgrounds, made by http://twitter.com/msurguy -->
+
+<div class="container">
+<div class="container">
+<div class="container">
+</br>
+</br>
+  <h3>${user.userName}'s PhotPrint</h3>
+  <c:forEach var="fundPriceHistory" items="${fundPriceHistory}">  
+  <c:out value = '${fundPriceHistory.price_date}' escapeXml='true' />
+  </c:forEach>   	
+    
+  <table class="table table-bordered">
+    <thead>
+      <tr>       
+        <th>Date</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+     <c:forEach var="fundPriceHistory" items="${fundPriceHistory}">    
+    	<tr> 
+        <td><c:out value = '${fundPriceHistory.price_date}' escapeXml='true' /></td>
+        <td><c:out value = '${fundPriceHistory.price}' escapeXml='true' /></td>
+	</tr>			    
+	</c:forEach>   	
+    </tbody>
+  </table>
+  </br>
+
+  
+</div>
+</div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+</div>
+
+<div id="map-canvas"></div>
+<jsp:include page="template-bottom.jsp" />
+    
   </body>
 </html>
