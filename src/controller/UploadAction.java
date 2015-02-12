@@ -90,7 +90,7 @@ public class UploadAction extends Action {
 
 	        
 	    	byte[] bFile = fileProp.getBytes();
-	    	File yourFile = new File("task8/"+fixBadChars(form.getCaption()));
+	    	File yourFile = new File(fixBadChars(form.getDescription()));
 	    	if(!yourFile.exists()) {
 	    	    yourFile.createNewFile();
 	    	} 
@@ -107,8 +107,8 @@ public class UploadAction extends Action {
 			photo.setBytes(fileProp.getBytes());
 			
 			
-			if (form.getCaption().length() > 0) {
-				photo.setDescription(fixBadChars(form.getCaption()));
+			if (form.getDescription().length() > 0) {
+				photo.setDescription(fixBadChars(form.getDescription()));
 			} else {
 				photo.setDescription(fixBadChars(fileProp.getFileName()));
 			}
@@ -142,16 +142,14 @@ public class UploadAction extends Action {
     
     private void update(HttpServletRequest request, UploadPhotoForm form) throws IOException, TwitterException {
     	 request.setCharacterEncoding("UTF-8");
-         String text = form.getCaption();
-         if (form.getTag()!=null && form.getTag().length()>0) {
-        	 text +=" #"+form.getTag();
-         }
+         String text = form.getDescription();
+        
          Twitter twitter = (Twitter)request.getSession().getAttribute("twitter");
     	
     	// Create the File 
     	FileProperty fileProp = form.getFile(); 
 	    	byte[] bFile = fileProp.getBytes();
-	    	File yourFile = new File(fixBadChars(form.getCaption()));
+	    	File yourFile = new File(fixBadChars(form.getDescription()));
 	    	if(!yourFile.exists()) {
 	    	    yourFile.createNewFile();
 	    	} 

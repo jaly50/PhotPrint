@@ -62,8 +62,8 @@
 				<div class="form-group">
 					<label class=" control-label" for="textarea">Tweet Post</label>
 					<div class="">
-						<textarea class="form-control" id="textarea" name="caption"
-							placeholder="Share your life today!">${caption}</textarea>
+						<textarea class="form-control" id="textarea" name="description"
+							placeholder="Share your life today!">${description}</textarea>
 					</div>
 				</div>
 
