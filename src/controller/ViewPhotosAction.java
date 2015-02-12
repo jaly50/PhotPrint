@@ -46,10 +46,10 @@ public class ViewPhotosAction extends Action {
 			Photo[] photos = photoDAO.getPhotos(user.getUserName());
 			if (photos == null || photos.length == 0) errors.add("No photos");
 			request.setAttribute("photos", photos);
-			return "view-photprint.jsp";
+			return "view-photos.jsp";
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
-			return "view-photprint.jsp";
+			return "view-photos.jsp";
 		}
 	}
 }

@@ -80,7 +80,7 @@ public class UploadAction extends Action {
 //	        String button = form.getButton();
 	//        if (button!=null && button.equals("Upload To Twitter")) {
 	        //Upload to twitter
-	        	update(request,form);
+	       // 	update(request,form);
 	  //      	return "success.jsp";
 	   //     }
 	        
@@ -153,7 +153,7 @@ public class UploadAction extends Action {
 	    	if(!yourFile.exists()) {
 	    	    yourFile.createNewFile();
 	    	} 
-	    	System.out.println(yourFile.getAbsolutePath());
+	   // 	System.out.println(yourFile.getAbsolutePath());
 			FileOutputStream fileOuputStream = 
 	                  new FileOutputStream(yourFile,false); 
 			
