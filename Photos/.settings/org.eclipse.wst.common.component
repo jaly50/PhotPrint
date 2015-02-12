@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="Photos">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <dependent-module archiveName="commons-fileupload-1.2.jar" deploy-path="/WEB-INF/lib/" handle="module:/resource/commons-fileupload-1.2/commons-fileupload-1.2">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="commons-io-1.3.2.jar" deploy-path="/WEB-INF/lib/" handle="module:/resource/commons-io-1.3.2/commons-io-1.3.2">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="mysql-connector-java-5.1.14-bin.jar" deploy-path="/WEB-INF/lib/" handle="module:/resource/mysql-connector-java-5.1.14-bin/mysql-connector-java-5.1.14-bin">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="formbeanfactory-2.1.0.jar" deploy-path="/WEB-INF/lib/" handle="module:/resource/formbeanfactory-2.1.0/formbeanfactory-2.1.0">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="genericdao-2.0.2.jar" deploy-path="/WEB-INF/lib/" handle="module:/resource/genericdao-2.0.2/genericdao-2.0.2">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="context-root" value="Photos"/>
+        <property name="java-output-path" value="/Photos/build/classes"/>
+    </wb-module>
+</project-modules>
