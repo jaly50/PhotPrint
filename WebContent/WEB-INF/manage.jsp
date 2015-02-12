@@ -93,28 +93,7 @@
 				
 
        
-            <!-- Multiple Checkboxes (inline) -->
-          <div class="form-group">
-            <label class=" control-label" for="checkboxes">Tags:</label>
-            <div class="">
-              <label class="checkbox-inline" for="checkboxes-0">
-                <input name="Travel" id="checkboxes-0" value="1" type="checkbox">
-                Travel
-              </label>
-              <label class="checkbox-inline" for="checkboxes-1">
-                <input name="Friends" id="checkboxes-1" value="2" type="checkbox">
-                Friends
-              </label>
-              <label class="checkbox-inline" for="checkboxes-2">
-                <input name="Myself" id="checkboxes-2" value="3" type="checkbox">
-                Myself
-              </label>
-              <label class="checkbox-inline" for="checkboxes-3">
-                <input name="Others" id="checkboxes-3" value="4" type="checkbox">
-                Others
-              </label>
-            </div>
-          </div>
+
 
 				<div class="form-group">
 					<div class="">
