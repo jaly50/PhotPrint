@@ -21,6 +21,7 @@ public class Controller extends HttpServlet {
 
         Action.add(new ChangePwdAction(model));
         Action.add(new ImageAction(model));
+        Action.add(new SearchTweetsAction(model));
         Action.add(new ListAction(model));
         Action.add(new LoginAction(model));
         Action.add(new LogoutAction(model));
