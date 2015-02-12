@@ -4,6 +4,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="databeans.User"%>
+<%@ page import="databeans.Photo"%>
+
 <jsp:include page="template-top.jsp" />
 
 <jsp:include page="error-list.jsp" />
@@ -100,26 +103,9 @@ google.maps.event.addDomListener(window, 'load', initialize);
 </br>
 </br>
   <h3>${user.userName}'s PhotPrint</h3>
-  <c:forEach var="fundPriceHistory" items="${fundPriceHistory}">  
-  <c:out value = '${fundPriceHistory.price_date}' escapeXml='true' />
+  <c:forEach var="photos" items="${photos}">  
+  <c:out value = '${photos.description}' escapeXml='true' />
   </c:forEach>   	
-    
-  <table class="table table-bordered">
-    <thead>
-      <tr>       
-        <th>Date</th>
-        <th>Price</th>
-      </tr>
-    </thead>
-    <tbody>
-     <c:forEach var="fundPriceHistory" items="${fundPriceHistory}">    
-    	<tr> 
-        <td><c:out value = '${fundPriceHistory.price_date}' escapeXml='true' /></td>
-        <td><c:out value = '${fundPriceHistory.price}' escapeXml='true' /></td>
-	</tr>			    
-	</c:forEach>   	
-    </tbody>
-  </table>
   </br>
 
   
