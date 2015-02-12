@@ -9,6 +9,7 @@ import org.genericdao.MatchArg;
 import org.genericdao.RollbackException;
 import org.genericdao.Transaction;
 
+import databeans.Fund;
 import databeans.Photo;
 
 public class PhotoDAO extends GenericDAO<Photo> {
@@ -119,5 +120,13 @@ public class PhotoDAO extends GenericDAO<Photo> {
 		int temp = p1.getPosition();
 		p1.setPosition(p2.getPosition());
 		p2.setPosition(temp);
+	}
+	
+	public Photo[] getPhotoWithLocation(String location) throws RollbackException {
+		Photo[] photos = match(MatchArg.equals("location", location));
+		if (location ==null) {
+			return null;
+		}
+		return photos;
 	}
 }
