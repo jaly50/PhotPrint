@@ -12,7 +12,7 @@ import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
-import databeans.Favorite;
+import databeans.Photo;
 import formbeans.IdForm;
 
 /**
@@ -49,7 +49,7 @@ public class ImageAction extends Action {
                 return "error.jsp";
             }
 
-        	Favorite p = photoDAO.read(form.getIdAsInt());
+        	Photo p = photoDAO.read(form.getIdAsInt());
     		if (p != null) request.setAttribute("photo",p);
     		
     		// Note: "/image" is mapped (in the web.xml file) to the ImageServlet

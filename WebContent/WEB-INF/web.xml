@@ -19,7 +19,7 @@
         </init-param>
         <init-param>
           <param-name>    jdbcURL                 </param-name> 
-	      <param-value>   jdbc:mysql:///photos    </param-value>
+	      <param-value>   jdbc:mysql:///test    </param-value>
         </init-param>
         <init-param>
           <param-name>    csvDir                  </param-name> 

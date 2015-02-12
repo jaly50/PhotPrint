@@ -29,7 +29,7 @@ import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
-import databeans.Favorite;
+import databeans.Photo;
 import databeans.User;
 import formbeans.UploadPhotoForm;
 
@@ -70,7 +70,7 @@ public class UploadAction extends Action {
 			request.setAttribute("userList",userDAO.getUsers());
 
 			User user = (User) request.getSession(false).getAttribute("user");
-        	Favorite[] photoList = photoDAO.getPhotos(user.getUserName());
+        	Photo[] photoList = photoDAO.getPhotos(user.getUserName());
 	        request.setAttribute("photoList",photoList);
 
 			UploadPhotoForm form = formBeanFactory.create(request);
@@ -103,25 +103,24 @@ public class UploadAction extends Action {
 	        
 	        
 	        
-			Favorite photo = new Favorite();  // id & position will be set when created
+			Photo photo = new Photo();  // id & position will be set when created
 			photo.setBytes(fileProp.getBytes());
 			
 			
 			if (form.getCaption().length() > 0) {
-				photo.setCaption(fixBadChars(form.getCaption()));
+				photo.setDescription(fixBadChars(form.getCaption()));
 			} else {
-				photo.setCaption(fixBadChars(fileProp.getFileName()));
+				photo.setDescription(fixBadChars(fileProp.getFileName()));
 			}
 			photo.setContentType(fileProp.getContentType());
 			photo.setOwner(user.getUserName());
 			photo.setLocation(form.getLocation());
-			photo.setTag(form.getTag());
 			photoDAO.create(photo);
 			
 		
 
 			// Update photoList (there's now one more on the list)
-        	Favorite[] newPhotoList = photoDAO.getPhotos(user.getUserName());
+        	Photo[] newPhotoList = photoDAO.getPhotos(user.getUserName());
 	        request.setAttribute("photoList",newPhotoList);
 	        return "manage.jsp";
 	 	} catch (RollbackException e) {

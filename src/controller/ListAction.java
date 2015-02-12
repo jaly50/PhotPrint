@@ -13,7 +13,7 @@ import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
-import databeans.Favorite;
+import databeans.Photo;
 import databeans.User;
 import formbeans.UserForm;
 
@@ -65,7 +65,7 @@ public class ListAction extends Action {
     			return "error.jsp";
     		}
 
-        	Favorite[] photoList = photoDAO.getPhotos(user.getUserName());
+        	Photo[] photoList = photoDAO.getPhotos(user.getUserName());
 	        request.setAttribute("photoList",photoList);
 	        return "list.jsp";
         } catch (RollbackException e) {

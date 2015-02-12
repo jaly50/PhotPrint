@@ -13,7 +13,7 @@ import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
-import databeans.Favorite;
+import databeans.Photo;
 import formbeans.IdForm;
 
 /*
@@ -60,14 +60,14 @@ public class ViewAction extends Action {
 	        }
         
     		int id = form.getIdAsInt();
-    		Favorite p = photoDAO.read(id);
+    		Photo p = photoDAO.read(id);
     		if (p == null) {
     			errors.add("No picture with id="+id);
     			return "error.jsp";
     		}
     		
     		request.setAttribute("photo",p);
-    		request.setAttribute("title",p.getCaption());
+    		request.setAttribute("title",p.getDescription());
 
             return "view.jsp";
     	} catch (RollbackException e) {

@@ -9,19 +9,19 @@ import org.genericdao.MatchArg;
 import org.genericdao.RollbackException;
 import org.genericdao.Transaction;
 
-import databeans.Favorite;
+import databeans.Photo;
 
-public class PhotoDAO extends GenericDAO<Favorite> {
+public class PhotoDAO extends GenericDAO<Photo> {
 	public PhotoDAO(String tableName, ConnectionPool pool) throws DAOException {
-		super(Favorite.class, tableName, pool);
+		super(Photo.class, tableName, pool);
 	}
 
-	public void create(Favorite newPhoto) throws RollbackException {
+	public void create(Photo newPhoto) throws RollbackException {
 		try {
 			Transaction.begin();
-			Favorite[] oldList = match(MatchArg.equals("owner",newPhoto.getOwner()));
+			Photo[] oldList = match(MatchArg.equals("owner",newPhoto.getOwner()));
 			int maxPos = 0;
-			for (Favorite p : oldList) {
+			for (Photo p : oldList) {
 				if (p.getPosition() > maxPos) maxPos = p.getPosition();
 			}
 			
@@ -36,7 +36,7 @@ public class PhotoDAO extends GenericDAO<Favorite> {
 	public void delete(int id, String owner) throws RollbackException {
 		try {
 			Transaction.begin();
-    		Favorite p = read(id);
+    		Photo p = read(id);
 
     		if (p == null) {
 				throw new RollbackException("Photo does not exist: id="+id);
@@ -53,16 +53,16 @@ public class PhotoDAO extends GenericDAO<Favorite> {
 		}
 	}
 	
-	public Favorite[] getPhotos(String owner) throws RollbackException {
-		Favorite[] list = match(MatchArg.equals("owner",owner));
+	public Photo[] getPhotos(String owner) throws RollbackException {
+		Photo[] list = match(MatchArg.equals("owner",owner));
 		Arrays.sort(list);
 		return list;
 	}
 	
-	public Favorite[] moveDown(int id, String owner) throws RollbackException {
+	public Photo[] moveDown(int id, String owner) throws RollbackException {
 		try {
 			Transaction.begin();
-			Favorite[] list = match(MatchArg.equals("owner",owner));
+			Photo[] list = match(MatchArg.equals("owner",owner));
 			Arrays.sort(list);
 			
 			int index = -1;
@@ -87,10 +87,10 @@ public class PhotoDAO extends GenericDAO<Favorite> {
 		}
 	}
 	
-	public Favorite[] moveUp(int id, String owner) throws RollbackException {
+	public Photo[] moveUp(int id, String owner) throws RollbackException {
 		try {
 			Transaction.begin();
-			Favorite[] list = match(MatchArg.equals("owner",owner));
+			Photo[] list = match(MatchArg.equals("owner",owner));
 			Arrays.sort(list);
 			
 			int index = -1;
@@ -115,7 +115,7 @@ public class PhotoDAO extends GenericDAO<Favorite> {
 		}
 	}
 	
-	private void swapPositions(Favorite p1, Favorite p2) {
+	private void swapPositions(Photo p1, Photo p2) {
 		int temp = p1.getPosition();
 		p1.setPosition(p2.getPosition());
 		p2.setPosition(temp);

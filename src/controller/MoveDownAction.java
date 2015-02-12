@@ -13,7 +13,7 @@ import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
-import databeans.Favorite;
+import databeans.Photo;
 import databeans.User;
 import formbeans.IdForm;
 
@@ -54,7 +54,7 @@ public class MoveDownAction extends Action {
 	    	photoDAO.moveDown(id,user.getUserName());
 
     		// Be sure to get the photoList after the delete
-        	Favorite[] photoList = photoDAO.getPhotos(user.getUserName());
+        	Photo[] photoList = photoDAO.getPhotos(user.getUserName());
 	        request.setAttribute("photoList",photoList);
 
 	        return "manage.jsp";

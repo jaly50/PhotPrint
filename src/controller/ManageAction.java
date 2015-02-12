@@ -11,7 +11,7 @@ import model.UserDAO;
 
 import org.genericdao.RollbackException;
 
-import databeans.Favorite;
+import databeans.Photo;
 import databeans.User;
 
 
@@ -50,7 +50,7 @@ public class ManageAction extends Action {
 			request.setAttribute("userList",userDAO.getUsers());
 
 			User user = (User) request.getSession(false).getAttribute("user");
-        	Favorite[] photoList = photoDAO.getPhotos(user.getUserName());
+        	Photo[] photoList = photoDAO.getPhotos(user.getUserName());
 	        request.setAttribute("photoList",photoList);
 
 	        return "manage.jsp";
