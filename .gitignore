@@ -1,6 +1,21 @@
-build/
-*.class
-
-*.class
-
-*.class
+ *.iml
+*.ipr
+*.iws
+*.orig
+*.rej
+**/.keep
+*.sdf
+*.suo
+*.vcxproj.user
+.idea
+.svn
+.DS_Store
+target
+build
+thumbs.db
+WebContent/WEB-INF/classes
+*.prefs
+.classpath
+.project
+.settings
+.classpath
