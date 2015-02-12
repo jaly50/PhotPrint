@@ -30,11 +30,12 @@ public class ViewPhotPrintAction extends Action {
 	
 	// get action name
 	public String getName() {
-		return "viewPhotPrint.do";
+		return "viewPhotPrint.do"; 
 	}
 	
 	// return next page name
 	public String perform(HttpServletRequest request) {
+		System.out.println("here");
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
 		
