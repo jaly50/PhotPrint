@@ -98,7 +98,7 @@
 					<label class=" control-label" for="textarea">Tweet Post</label>
 					<div class="">
 						<textarea class="form-control" id="textarea" name="description"
-							placeholder="Share your life today!">${description}</textarea>
+							placeholder="Share your life today! You can add tags here like this. #tag #happy">${description}</textarea>
 					</div>
 				</div>
 				
