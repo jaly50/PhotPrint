@@ -79,7 +79,7 @@
 					<label class=" control-label" for="filebutton">Photos</label>
 					
 						<div class="">
-                         <input id="fileupload" type="file" name="files[]" value="${filename}" data-url="upload" multiple>
+                         <input id="fileupload" type="file" name="file" value="${filename}" data-url="upload" multiple>
 				        	<h5 style="text-align:center"><i style="color:#ccc"><small>Max File Size: 2 Mb - 5 Files maximum</small></i></h5>
 
 	<table id="uploaded-files" class="table">

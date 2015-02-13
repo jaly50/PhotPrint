@@ -19,7 +19,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
 import sun.net.www.protocol.http.HttpURLConnection;
-import databeans.TweetBean;
+
 
 public class GeoInfo {
 
