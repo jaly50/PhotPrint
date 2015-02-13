@@ -80,7 +80,7 @@ public class UploadAction extends Action {
 //	        String button = form.getButton();
 	//        if (button!=null && button.equals("Upload To Twitter")) {
 	        //Upload to twitter
-	       // 	update(request,form);
+	        	update(request,form);
 	  //      	return "success.jsp";
 	   //     }
 	        
@@ -134,7 +134,11 @@ public class UploadAction extends Action {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return "manage.jsp";
+		} catch (TwitterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		return "manage.jsp";
     }
     
     private void update(HttpServletRequest request, UploadPhotoForm form) throws IOException, TwitterException {
