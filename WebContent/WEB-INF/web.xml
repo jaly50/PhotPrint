@@ -51,6 +51,15 @@
         <servlet-class>twitter4j.examples.signin.PostServlet
         </servlet-class>
     </servlet>
+     <servlet>
+  	<servlet-name>upload</servlet-name>            
+  	<servlet-class>com.hmkcode.FileUploadServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>upload</servlet-name>
+  	<url-pattern>/upload</url-pattern>
+  </servlet-mapping>
+    
     <servlet-mapping>
         <servlet-name>signin</servlet-name>
         <url-pattern>/signin</url-pattern>

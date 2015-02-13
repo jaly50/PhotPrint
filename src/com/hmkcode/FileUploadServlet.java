@@ -30,7 +30,7 @@ public class FileUploadServlet extends HttpServlet {
 	 ****************************************************/
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 	        throws ServletException, IOException{
-	    
+		System.out.println("Add a new picture to file upload servlet");
 		// 1. Upload File Using Java Servlet API
 		//files.addAll(MultipartRequestHandler.uploadByJavaServletAPI(request));			
 		
