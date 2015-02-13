@@ -9,7 +9,6 @@ import org.genericdao.MatchArg;
 import org.genericdao.RollbackException;
 import org.genericdao.Transaction;
 
-import databeans.Fund;
 import databeans.Photo;
 
 public class PhotoDAO extends GenericDAO<Photo> {
