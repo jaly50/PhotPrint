@@ -109,7 +109,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
   </br>
   </c:forEach>   	
   </br>
-
+<h3><a href="viewAnalysis.do">View Analysis</a></h3>
   
 </div>
 </div>
@@ -121,8 +121,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
     <br />
     <br />
 </div>
-
-<div id="map-canvas"></div>
+<div id="map-canvas"style="width: 1000px; height: 800px"></div>
 <jsp:include page="template-bottom.jsp" />
     
   </body>

@@ -2,87 +2,77 @@
   <head>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
-      google.load("visualization", "1", {packages:["corechart"]});
-      google.setOnLoadCallback(drawChart);
-      function drawChart() {
+      google.load('visualization', '1', {'packages': ['table', 'map', 'corechart']});
+      google.setOnLoadCallback(initialize);
 
-        var data = google.visualization.arrayToDataTable([
-          ['Task', 'Hours per Day'],
-          ['Friend',     11],
-          ['Travel',      2],
-          ['Family',  2],
-          ['Myself', 2],
-          ['Others',    7]
-        ]);
+      function initialize() {
+        // The URL of the spreadsheet to source data from.
+        var query = new google.visualization.Query(
+            'https://spreadsheets.google.com/pub?key=pCQbetd-CptF0r8qmCOlZGg');
+        query.send(draw);
+      }
 
-        var options = {
-          title: 'My Photo Category'
-        };
+      function draw(response) {
+        if (response.isError()) {
+          alert('Error in query');
+        }
 
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        var ticketsData = response.getDataTable();
+        var chart = new google.visualization.ColumnChart(
+            document.getElementById('chart_div'));
+        chart.draw(ticketsData, {'isStacked': true, 'legend': 'bottom',
+            'vAxis': {'title': 'Number of tickets'}});
 
-<<<<<<< Updated upstream
-<!-- Page Content -->
-<!-- This is a very simple parallax effect achieved by simple CSS 3 multiple backgrounds, made by http://twitter.com/msurguy -->
+        var geoData = google.visualization.arrayToDataTable([
+          ['Lat', 'Lon', 'Name', 'Food?'],
+          [51.5072, -0.1275, 'Cinematics London', true],
+          [48.8567, 2.3508, 'Cinematics Paris', true],
+          [55.7500, 37.6167, 'Cinematics Moscow', false]]);
 
-<div class="container">
-<div class="container">
-<div class="container">
-  <h2>${customer.firstname} ${customer.lastname}'s Transaction History</h2>
-    </br>
-  
-  <table class="table table-bordered">
-    <thead> 
-    <tr>
-        <th><p align = left>Date</th>
-        <th><p align = left>Operation</th>
-        <th><p align = left>Fund Name</th>
-        <th><p align = left>Fund Ticker</th>
-        <th><p align = right>Shares</th>
-        <th><p align = right>Price</th>
-        <th><p align = right>Amount</th>
-      </tr>      
-    </thead>
-    
-    <tbody>
-    	<c:forEach var="transactionInfo" items="${transactionInfo}">    
-    	<tr> 
-	    <td><p align = left><c:out value = '${transactionInfo.date}' escapeXml='true' /></td>
-        <td><p align = left><c:out value = '${transactionInfo.operation}' escapeXml='true' /></td>
-        <td><p align = left><c:out value = '${transactionInfo.name}' escapeXml='true' /></td>
-        <td><p align = left><c:out value = '${transactionInfo.symbol}' escapeXml='true' /></td>
-        <td><p align = right><c:out value = '${transactionInfo.shares}' escapeXml='true' /></td>
-        <td><p align = right><c:out value = '${transactionInfo.price}' escapeXml='true' /></td>
-        <td><p align = right><c:out value = '${transactionInfo.amount}' escapeXml='true' /></td>
-	</tr>			    
-	</c:forEach>   	 
-    </tbody>
-  </table>
-</div>
-</div>
-   
-    <br />
-    <br />
-    <br />
-</div>
+        var geoView = new google.visualization.DataView(geoData);
+        geoView.setColumns([0, 1]);
 
- 
-<jsp:include page="template-bottom.jsp" />
-=======
-        chart.draw(data, options);
+        var table =
+            new google.visualization.Table(document.getElementById('table_div'));
+        table.draw(geoData, {showRowNumber: false});
+
+        var map =
+            new google.visualization.Map(document.getElementById('map_div'));
+        map.draw(geoView, {showTip: true});
+
+        // Set a 'select' event listener for the table.
+        // When the table is selected, we set the selection on the map.
+        google.visualization.events.addListener(table, 'select',
+            function() {
+              map.setSelection(table.getSelection());
+            });
+
+        // Set a 'select' event listener for the map.
+        // When the map is selected, we set the selection on the table.
+        google.visualization.events.addListener(map, 'select',
+            function() {
+              table.setSelection(map.getSelection());
+            });
       }
     </script>
   </head>
+
   <body>
-  	<h2>2014-12-05, in NewYork, I took 100 photos.
-  	55 myself.
-  	10 friends.
-  	20 others.
-  	Happy!
-  	<a href= clickPhotoHistory.do>View Photos</a>	
-  	<a href= clickPhotoHistory.do>Back to previous page</a>	
-  	</h2>
-    <div id="piechart" style="width: 900px; height: 500px;"></div>
+    <table align="center">
+      <tr valign="top">
+        <td style="width: 50%;">
+          <div id="map_div" style="width: 400px; height: 300;"></div>
+        </td>
+        <td style="width: 50%;">
+          <div id="table_div"></div>
+        </td>
+      </tr>
+      <tr>
+        <td colSpan=2>
+          <div id="chart_div" style="align: center; width: 700px; height: 300px;"></div>
+        </td>
+      </tr>
+    </table>
+
   </body>
 </html>
->>>>>>> Stashed changes
