@@ -2,6 +2,13 @@
 <jsp:include page="template-top.jsp" />
 
 <jsp:include page="error-list.jsp" />
+<script src="js/jquery.1.9.1.min.js"></script>
+
+<script src="js/vendor/jquery.ui.widget.js"></script>
+<script src="js/jquery.iframe-transport.js"></script>
+<script src="js/jquery.fileupload.js"></script>
+
+
 <script
 	src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
 
@@ -70,10 +77,20 @@
 				<!-- File Button -->
 				<div class="form-group">
 					<label class=" control-label" for="filebutton">Photos</label>
-					<div class="">
+					
+						<div class="">
+                         <input id="fileupload" type="file" name="files[]" value="${filename}" data-url="upload" multiple>
+				        	<h5 style="text-align:center"><i style="color:#ccc"><small>Max File Size: 2 Mb - 5 Files maximum</small></i></h5>
 
-						<input id="filebutton" name="file" value="${filename}"
-							class="input-file" type="file">
+	<table id="uploaded-files" class="table">
+		<tr>
+			<th>File Name</th>
+			<th>File Size</th>
+			<th>File Type</th>
+			
+		</tr>
+	</table>
+						
 					</div>
 				</div>
 

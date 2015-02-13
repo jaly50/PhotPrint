@@ -16,7 +16,6 @@
   <link rel="stylesheet" href="css/app.css">
    <link rel="stylesheet" href="css/login.css" />
 
-  <script src="js/vendor/modernizr.js"></script>
 </head>
 
 
