@@ -3,11 +3,6 @@
 	<name>Photos</name>
 	<comment></comment>
 	<projects>
-		<project>commons-fileupload-1.2</project>
-		<project>commons-io-1.3.2</project>
-		<project>mysql-connector-java-5.1.14-bin</project>
-		<project>formbeanfactory-2.1.0</project>
-		<project>genericdao-2.0.2</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

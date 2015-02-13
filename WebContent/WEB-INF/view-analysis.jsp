@@ -1,78 +1,72 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="databeans.User"%>
+<%@ page import="databeans.Photo"%>
+<%@ page import="databeans.Location"%>
+<%@ page import="databeans.LocationData"%>
+
+<jsp:include page="template-top.jsp" />
+
+<jsp:include page="error-list.jsp" />
+
+
 <html>
   <head>
+    <!--Load the AJAX API-->
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
-      google.load('visualization', '1', {'packages': ['table', 'map', 'corechart']});
-      google.setOnLoadCallback(initialize);
 
-      function initialize() {
-        // The URL of the spreadsheet to source data from.
-        var query = new google.visualization.Query(
-            'https://spreadsheets.google.com/pub?key=pCQbetd-CptF0r8qmCOlZGg');
-        query.send(draw);
-      }
+      // Load the Visualization API and the piechart package.
+      google.load('visualization', '1.0', {'packages':['corechart']});
 
-      function draw(response) {
-        if (response.isError()) {
-          alert('Error in query');
-        }
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.setOnLoadCallback(drawChart);
 
-        var ticketsData = response.getDataTable();
-        var chart = new google.visualization.ColumnChart(
-            document.getElementById('chart_div'));
-        chart.draw(ticketsData, {'isStacked': true, 'legend': 'bottom',
-            'vAxis': {'title': 'Number of tickets'}});
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
 
-        var geoData = google.visualization.arrayToDataTable([
-          ['Lat', 'Lon', 'Name', 'Food?'],
-          [51.5072, -0.1275, 'Cinematics London', true],
-          [48.8567, 2.3508, 'Cinematics Paris', true],
-          [55.7500, 37.6167, 'Cinematics Moscow', false]]);
+    	  var data = google.visualization.arrayToDataTable([
+    	                                                    ['Place',          'Number of Photos'],
+    	                                                    <c:forEach items="${locationsData}" var="place"> 
+    	            										,[${place.location}, ${place.number}]
+    	            										</c:forEach>
+    	                                                  ]);
 
-        var geoView = new google.visualization.DataView(geoData);
-        geoView.setColumns([0, 1]);
-
-        var table =
-            new google.visualization.Table(document.getElementById('table_div'));
-        table.draw(geoData, {showRowNumber: false});
-
-        var map =
-            new google.visualization.Map(document.getElementById('map_div'));
-        map.draw(geoView, {showTip: true});
-
-        // Set a 'select' event listener for the table.
-        // When the table is selected, we set the selection on the map.
-        google.visualization.events.addListener(table, 'select',
-            function() {
-              map.setSelection(table.getSelection());
-            });
-
-        // Set a 'select' event listener for the map.
-        // When the map is selected, we set the selection on the table.
-        google.visualization.events.addListener(map, 'select',
-            function() {
-              table.setSelection(map.getSelection());
-            });
+    	                                                  var options = {
+    	                                                    title: 'Population of Largest U.S. Cities',
+    	                                                    width: 1000,
+    	                                                    height: 563,
+    	                                                    hAxis: {
+    	                                                      title: 'Total Population',
+    	                                                      minValue: 0
+    	                                                    },
+    	                                                    vAxis: {
+    	                                                      title: 'City'
+    	                                                    }
+    	                                                  };
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
       }
     </script>
   </head>
-
-  <body>
-    <table align="center">
-      <tr valign="top">
-        <td style="width: 50%;">
-          <div id="map_div" style="width: 400px; height: 300;"></div>
-        </td>
-        <td style="width: 50%;">
-          <div id="table_div"></div>
-        </td>
-      </tr>
-      <tr>
-        <td colSpan=2>
-          <div id="chart_div" style="align: center; width: 700px; height: 300px;"></div>
-        </td>
-      </tr>
-    </table>
-
+<body>
+    
+<div class="container">
+  <h3>${user.userName}'s PhotPrint Analysis</h3>
+  <c:forEach var="locationsData" items="${locationsData}">  
+  	<c:out value = '${locationsData.location}' escapeXml='true' />
+  	<c:out value = '${locationsData.number}' escapeXml='true' />
+  	</br>
+  </c:forEach>   	
+  </br>
+  <!--Div that will hold the pie chart-->
+    <div id="chart_div"></div>
+</div>
+<jsp:include page="template-bottom.jsp" />
   </body>
 </html>
+
