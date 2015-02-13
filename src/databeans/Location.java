@@ -13,6 +13,7 @@ public class Location {
 	public Location(Photo photo) {
 		try {
 			double[] data = GeoInfo.getGeoCode(photo.getLocation());
+			System.out.println(data);
 			lat = data[0];
 			lng = data[1];
 			location = photo.getLocation();

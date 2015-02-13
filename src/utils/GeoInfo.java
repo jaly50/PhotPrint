@@ -9,11 +9,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 
-import javax.net.ssl.HttpsURLConnection;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import javax.net.ssl.HttpsURLConnection;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -51,8 +46,11 @@ public class GeoInfo {
 			System.out.println("location" + location.toString());
 			double lat = (Double) location.get("lat");
 			double lng = (Double) location.get("lng");
-			
-			return new double[] {lat,lng};
+			System.out.println("location!!!!!!!!!" + lat + " "+ lng);
+			double[] xy = new double[2];
+			xy[0] = lat;
+			xy[1] = lng;
+			return xy;
 		} catch (MalformedURLException e) {
 			throw new IOException("Invalid endpoint URL specified.", e);
 		} finally {
