@@ -9,34 +9,19 @@ public class UploadPhotoForm extends FormBean {
 	private String button     = "";
 	private String description    = "";
 	private String location = "Pittsburgh";
-
-	private FileProperty file = null;
 	
 	public static int FILE_MAX_LENGTH = 1024 * 1024;
 	
 	public String       getButton()         { return button;         }
-	public FileProperty getFile()           { 
-		return file;   
-	}
+
 
 	public void setButton(String s)         { button      = s;        }
 	public void setCaption(String s)        { setDescription(trimAndConvert(s,"<>\"")); }
-	public void setFile(FileProperty file)  { this.file   = file;     }
 	
 	public ArrayList<String> getValidationErrors() {
 		ArrayList<String> errors = new ArrayList<String>();
 		
-		if (file == null || file.getFileName().length() == 0) {
-			errors.add("You must provide a file");
-			return errors;
-		}
-		System.out.println(file.toString());
-		System.out.println(file.getFileName());
-		
 
-		if (file.getBytes().length == 0) {
-			errors.add("Zero length file");
-		}
 		
 		return errors;
 	}

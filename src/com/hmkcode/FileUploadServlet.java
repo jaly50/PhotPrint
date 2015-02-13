@@ -23,7 +23,7 @@ public class FileUploadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	// this will store uploaded files
-	private static List<FileMeta> files = new LinkedList<FileMeta>();
+	public static List<FileMeta> files = new LinkedList<FileMeta>();
 	/***************************************************
 	 * URL: /upload
 	 * doPost(): upload the files and other parameters
@@ -36,6 +36,7 @@ public class FileUploadServlet extends HttpServlet {
 		
 		// 1. Upload File Using Apache FileUpload
 		List<FileMeta> xy = MultipartRequestHandler.uploadByApacheFileUpload(request);
+		System.out.println(xy.size());
 		files.addAll(xy);
 		
 		// Remove some files
@@ -67,7 +68,6 @@ public class FileUploadServlet extends HttpServlet {
 		 // 2. Get the file of index "f" from the list "files"
 		 FileMeta getFile = files.get(Integer.parseInt(value));
 		 
-		 System.out.println("Get in to file upload servelt");
 		 try {		
 			 	// 3. Set the response content type = file content type 
 			 	response.setContentType(getFile.getFileType());

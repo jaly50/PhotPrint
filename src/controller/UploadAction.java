@@ -22,11 +22,15 @@ import org.mybeans.form.FileProperty;
 import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
+import com.hmkcode.FileUploadServlet;
+import com.hmkcode.vo.FileMeta;
+
 import twitter4j.Status;
 import twitter4j.StatusUpdate;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
+import twitter4j.UploadedMedia;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 import databeans.Photo;
@@ -61,68 +65,46 @@ public class UploadAction extends Action {
 	public String getName() { return "upload.do"; }
 
     public String perform(HttpServletRequest request)  {
+    	 List<FileMeta> files=FileUploadServlet.files;
+    	 System.out.println("In upload action, we receive files: "+files.size());
+    	 
+    	
         // Set up the errors list
         List<String> errors = new ArrayList<String>();
         request.setAttribute("errors",errors);
         
 		try {
-            // Set up user list for nav bar
-			request.setAttribute("userList",userDAO.getUsers());
-
 			User user = (User) request.getSession(false).getAttribute("user");
-        	Photo[] photoList = photoDAO.getPhotos(user.getUserName());
-	        request.setAttribute("photoList",photoList);
-
+    
 			UploadPhotoForm form = formBeanFactory.create(request);
 	        errors.addAll(form.getValidationErrors());
 	        if (errors.size() > 0) return "error.jsp";
             
-//	        String button = form.getButton();
-	//        if (button!=null && button.equals("Upload To Twitter")) {
+
 	        //Upload to twitter
 	        	update(request,form);
-	  //      	return "success.jsp";
-	   //     }
-	        
-	        
-	        FileProperty fileProp = form.getFile();
-	        
 
 	        
-	    	byte[] bFile = fileProp.getBytes();
-	    	File yourFile = new File(fixBadChars(form.getDescription()));
-	    	if(!yourFile.exists()) {
-	    	    yourFile.createNewFile();
-	    	} 
-	    	System.out.println(yourFile.getAbsolutePath());
-			FileOutputStream fileOuputStream = 
-	                  new FileOutputStream(yourFile,false); 
-			
-		    fileOuputStream.write(bFile);
-		    fileOuputStream.close();
+	       //Add those photo to database 
+	       for (int i=0; i<files.size(); i++) {
+	    	   FileMeta temp =files.get(i);
+	    	   byte[] bFile = temp.getBytes();
+	    	   Photo photo = new Photo();  
+	    	   photo.setBytes(bFile);
+	    	   
+				if (form.getDescription().length() > 0) {
+					photo.setDescription(fixBadChars(form.getDescription()));
+				} else {
+					photo.setDescription(fixBadChars(temp.getFileName()));
+				}
+				
+				photo.setContentType(temp.getFileType());
+				photo.setOwner(user.getUserName());
+				photo.setLocation(form.getLocation());
+				photoDAO.create(photo);
+				request.setAttribute("description", form.getDescription());
+	       }
 	        
-	        
-	        
-			Photo photo = new Photo();  // id & position will be set when created
-			photo.setBytes(fileProp.getBytes());
-			
-			
-			if (form.getDescription().length() > 0) {
-				photo.setDescription(fixBadChars(form.getDescription()));
-			} else {
-				photo.setDescription(fixBadChars(fileProp.getFileName()));
-			}
-			photo.setContentType(fileProp.getContentType());
-			photo.setOwner(user.getUserName());
-			photo.setLocation(form.getLocation());
-			photoDAO.create(photo);
-			request.setAttribute("description", form.getDescription());
-			
-		
-
-			// Update photoList (there's now one more on the list)
-        	Photo[] newPhotoList = photoDAO.getPhotos(user.getUserName());
-	        request.setAttribute("photoList",newPhotoList);
 	        return "manage.jsp";
 	 	} catch (RollbackException e) {
 			errors.add(e.getMessage());
@@ -143,30 +125,48 @@ public class UploadAction extends Action {
     
     private void update(HttpServletRequest request, UploadPhotoForm form) throws IOException, TwitterException {
     	 request.setCharacterEncoding("UTF-8");
+    	 
+    	 
+    	 //Get files --pictures
+    	 List<FileMeta> files=FileUploadServlet.files;
          String text = form.getDescription();
         
          Twitter twitter = (Twitter)request.getSession().getAttribute("twitter");
-    	
-    	// Create the File 
-    	FileProperty fileProp = form.getFile(); 
-	    	byte[] bFile = fileProp.getBytes();
-	    	File yourFile = new File(fixBadChars(form.getDescription()));
-	    	if(!yourFile.exists()) {
-	    	    yourFile.createNewFile();
-	    	} 
-	   // 	System.out.println(yourFile.getAbsolutePath());
-			FileOutputStream fileOuputStream = 
-	                  new FileOutputStream(yourFile,false); 
-			
-		    fileOuputStream.write(bFile);
-		    fileOuputStream.close();
-  
-	             StatusUpdate sta = new StatusUpdate(text);
-	             sta.setMedia(yourFile);
-	            Status status = twitter.updateStatus(sta);  
-	            System.out.println("Successfully updated the status to [" + status.getText() + "].");  
-	           
-	     
+         
+         //Turn fileMeta to files
+         File[] fs = new File[files.size()];
+         for (int i=0; i<files.size(); i++) {
+	    	   FileMeta temp =files.get(i);
+	    	   byte[] bFile = temp.getBytes();
+	    	   File yourFile = new File(fixBadChars(form.getDescription()));
+		    	if(!yourFile.exists()) {
+		    	    yourFile.createNewFile();
+		    	} 
+		   // 	System.out.println(yourFile.getAbsolutePath());
+				FileOutputStream fileOuputStream = 
+		                  new FileOutputStream(yourFile,false); 
+				
+			    fileOuputStream.write(bFile);
+			    fileOuputStream.close();
+			    fs[i] = yourFile;
+         }
+         
+         
+         //Get thier media ID
+         long[] mediaIds = new long[files.size()];
+         for (int i=0; i<files.size(); i++) {
+             UploadedMedia media = twitter.uploadMedia(fs[i]);
+             System.out.println("Uploaded: id=" + media.getMediaId()
+                     + ", w=" + media.getImageWidth() + ", h=" + media.getImageHeight()
+                     + ", type=" + media.getImageType() + ", size=" + media.getSize());
+             mediaIds[i] = media.getMediaId();
+         }
+         StatusUpdate update = new StatusUpdate(text);
+         update.setMediaIds(mediaIds);
+         Status status = twitter.updateStatus(update);
+         System.out.println("Successfully updated the status to [" + status.getText() + "][" + status.getId() + "].");
+
+    
 	}
 
 	private String fixBadChars(String s) {

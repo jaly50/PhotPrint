@@ -1,13 +1,26 @@
 
+
 <jsp:include page="template-top.jsp" />
 
 <jsp:include page="error-list.jsp" />
+
 <script src="js/jquery.1.9.1.min.js"></script>
 
 <script src="js/vendor/jquery.ui.widget.js"></script>
 <script src="js/jquery.iframe-transport.js"></script>
 <script src="js/jquery.fileupload.js"></script>
 
+<!-- bootstrap just to have good looking page -->
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<link href="bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet" />
+
+<!-- we code these -->
+<link href="css/dropzone.css" type="text/css" rel="stylesheet" />
+<script src="js/myuploadfunction.js"></script>
+
+<!-- header style ignore it -->
+<link href="css/mystyle.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
 
 <script
 	src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
@@ -51,36 +64,23 @@
 	font-weight: normal;
 	line-height: 20px;
 	margin-top: 0px;
-	width:30em;
+	width:700px;
     height:30em;
+    padding:20px;
 	left: 50%;
-	margin-left: 30em; /*set to a negative number 1/2 of your width*/
+	margin-left: 17em; /*set to a negative number 1/2 of your width*/
 }
 </style>
-<body>
-	<p>	<div id="big-form" class="well" >
-		<form method="post" action="upload.do" enctype="multipart/form-data">
-			<fieldset>
 
-				<!-- Form Name -->
+
+	<div id="big-form" class="well" >
+
+     	<!-- Form Name -->
 				<legend>Upload tweet</legend>
 
-				<!-- Textarea -->
-				<div class="form-group">
-					<label class=" control-label" for="textarea">Tweet Post</label>
-					<div class="">
-						<textarea class="form-control" id="textarea" name="description"
-							placeholder="Share your life today!">${description}</textarea>
-					</div>
-				</div>
-
-				<!-- File Button -->
-				<div class="form-group">
-					<label class=" control-label" for="filebutton">Photos</label>
-					
-						<div class="">
-                         <input id="fileupload" type="file" name="file" value="${filename}" data-url="upload" multiple>
-				        	<h5 style="text-align:center"><i style="color:#ccc"><small>Max File Size: 2 Mb - 5 Files maximum</small></i></h5>
+	<input id="fileupload" type="file" name="files[]" data-url="upload" multiple>
+	
+	<h5 style="text-align:center"><i style="color:#ccc"><small>Max File Size: 2 Mb - 5 Files maximum</small></i></h5>
 
 	<table id="uploaded-files" class="table">
 		<tr>
@@ -90,11 +90,18 @@
 			
 		</tr>
 	</table>
-						
+	
+	<form method="post" action="upload.do" enctype="multipart/form-data">
+	
+					<!-- Textarea -->
+				<div class="form-group">
+					<label class=" control-label" for="textarea">Tweet Post</label>
+					<div class="">
+						<textarea class="form-control" id="textarea" name="description"
+							placeholder="Share your life today!">${description}</textarea>
 					</div>
 				</div>
-
-
+				
 				<!-- Text input-->
 				<div class="form-group">
 					<label class=" control-label" for="textinput">Location</label>
@@ -104,31 +111,18 @@
 							class="form-control input-md" > 
 					</div>
 				</div>
-
 				
-
 				
-
-       
-
-
+				
 				<div class="form-group">
 					<div class="">
 						<button id="singlebutton" name="singlebutton"
 							class="btn btn-primary">Upload</button>
 					</div>
 				</div>
+				
+			</form>
+</div>
 
-			</fieldset>
-		</form>
-		<div class="clearfix"></div>
-	</div>
-
-
-
-<jsp:include page="template-bottom.jsp" />
-
-    
-
-
-	
+</body> 
+</html>

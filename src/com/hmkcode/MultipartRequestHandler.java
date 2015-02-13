@@ -93,6 +93,7 @@ public class MultipartRequestHandler {
 						temp.setContent(item.getInputStream());
 						temp.setFileType(item.getContentType());
 						temp.setFileSize(item.getSize()/1024+ "Kb");
+						temp.setBytes(item.get());
 						
 				    	// 2.7 Add created FileMeta object to List<FileMeta> files
 						files.add(temp);
