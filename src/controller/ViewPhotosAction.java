@@ -12,11 +12,17 @@ import model.PhotoDAO;
 import model.UserDAO;
 
 import org.genericdao.RollbackException;
+import org.mybeans.form.FormBeanException;
+import org.mybeans.form.FormBeanFactory;
 
 import databeans.Photo;
 import databeans.User;
+import formbeans.ViewPhotosForm;
 
 public class ViewPhotosAction extends Action {
+	private FormBeanFactory<ViewPhotosForm> formBeanFactory = 
+			FormBeanFactory.getInstance(ViewPhotosForm.class);
+	
 	private PhotoDAO photoDAO;
 	private UserDAO userDAO;
 	
@@ -42,15 +48,43 @@ public class ViewPhotosAction extends Action {
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
 		if (user == null)	return "login.jsp";
+		
+		
+		// get form, set form attribute
 		try {
-			Photo[] photos = photoDAO.getPhotos(user.getUserName());
-			if (photos == null || photos.length == 0) errors.add("No photos");
+			ViewPhotosForm form = formBeanFactory.create(request);
+			request.setAttribute("form", form);
+							
+			// if no parameters passed in
+			if (!form.isPresent()) {
+				return "view-photprint.jsp";
+			}
+							
+			// check error, if has
+			errors.addAll(form.getValidationErrors());
+			if (errors.size() > 0) {
+				return "view-photprint.jsp";
+			}
+							
+			// if no error, get the clicked fund
+			String location = form.getLocation();
+			Photo[] photos = 
+					photoDAO.getPhotoWithOwnerAndLocation(user.getUserName(), location);
+							
+			if (photos == null || photos.length == 0) {
+				errors.add("Photo item does not exist");
+				return "view-photprint.jsp";
+			}
+							
+			// set photos attribute
 			request.setAttribute("photos", photos);
 			return "view-photos.jsp";
+					
+		} catch (FormBeanException e) {
+			return "view-photprint.jsp";
 		} catch (RollbackException e) {
-			errors.add(e.getMessage());
-			return "view-photos.jsp";
-		}
+			return "view-photprint.jsp";
+		} 		
 	}
 }
 

@@ -100,11 +100,13 @@ google.maps.event.addDomListener(window, 'load', initialize);
 <div class="container">
 <div class="container">
 <div class="container">
-</br>
-</br>
+
   <h3>${user.userName}'s PhotPrint</h3>
-  <c:forEach var="photos" items="${photos}">  
-  <c:out value = '${photos.description}' escapeXml='true' />
+  <c:forEach var="photos" items="${photos}"> 
+  <form action="viewPhotos.do" method="POST">             		
+       		<a href= "viewPhotos.do?id=${photos.location}">${photos.location}</a>
+  </form>  
+  </br>
   </c:forEach>   	
   </br>
 

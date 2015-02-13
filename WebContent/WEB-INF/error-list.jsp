@@ -1,3 +1,7 @@
+</br>
+</br>
+</br>
+</br>
 <%
     java.util.List<String> errors = (java.util.List) request.getAttribute("errors");
 	if (errors != null && errors.size() > 0) {

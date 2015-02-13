@@ -122,9 +122,11 @@ public class PhotoDAO extends GenericDAO<Photo> {
 		p2.setPosition(temp);
 	}
 	
-	public Photo[] getPhotoWithLocation(String location) throws RollbackException {
-		Photo[] photos = match(MatchArg.equals("location", location));
-		if (location ==null) {
+	public Photo[] getPhotoWithOwnerAndLocation(String owner, String location) throws RollbackException {
+		MatchArg matchArg1 = MatchArg.equals("owner", owner);
+		MatchArg matchArg2 = MatchArg.equals("location", location);
+		Photo[] photos = match(MatchArg.and(matchArg1,matchArg2));
+		if (photos == null) {
 			return null;
 		}
 		return photos;
