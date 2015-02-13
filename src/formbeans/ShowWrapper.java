@@ -3,8 +3,7 @@ package formbeans;
 import org.mybeans.form.FormBean;
 
 import databeans.Photo;
-import databeans.Tags;
-import databeans.Title;
+
 
 public class ShowWrapper extends FormBean {
 

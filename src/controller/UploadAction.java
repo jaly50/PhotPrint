@@ -133,10 +133,6 @@ public class UploadAction extends Action {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return "manage.jsp";
-		} catch (TwitterException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return "manage.jsp";
 		}
     }
     
