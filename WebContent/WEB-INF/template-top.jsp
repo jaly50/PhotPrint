@@ -41,8 +41,8 @@
             <div class="collapse navbar-collapse"
                 id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Services</a></li>
+                    <li><a href="upload.do">Upload</a></li>
+                    <li><a href="upload.do">Services</a></li>
                     <li><a href="viewPhotPrint.do">My PhotPrint</a></li>
                 </ul>
             </div>

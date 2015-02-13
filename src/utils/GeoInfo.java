@@ -26,8 +26,10 @@ public class GeoInfo {
 	public static double[] getGeoCode(String place) throws IOException {
 		HttpURLConnection connection = null;
 		
+		String placeValid = parsePlace(place);
+		
 		try {
-			URL url = new URL("http://maps.googleapis.com/maps/api/geocode/json?address=" + place + "&sensor=false");
+			URL url = new URL("http://maps.googleapis.com/maps/api/geocode/json?address=" + placeValid + "&sensor=false");
 			connection =  (HttpURLConnection) url.openConnection();
 			connection.setRequestMethod("GET");
 			connection.setDoOutput(true);
@@ -78,10 +80,21 @@ public class GeoInfo {
 			}
 		}
 	
+	public static String parsePlace(String place) {
+		if (place == null || place.length() == 0) return null;
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < place.length(); i++) {
+			if (place.charAt(i) == ' ' || place.charAt(i) == '.'
+					|| place.charAt(i) == ',') continue;
+			sb.append(place.charAt(i));
+		}
+		return sb.toString();
+	}
+		
 	public static void main(String[] args) {
 		try {
 			
-			double [] locations = new GeoInfo().getGeoCode("pittsburgh");
+			double [] locations = new GeoInfo().getGeoCode("?");
 			System.out.print(Arrays.toString(locations));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

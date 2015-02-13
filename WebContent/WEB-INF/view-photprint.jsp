@@ -6,6 +6,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="databeans.User"%>
 <%@ page import="databeans.Photo"%>
+<%@ page import="databeans.Location"%>
 
 <jsp:include page="template-top.jsp" />
 
@@ -16,7 +17,7 @@
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <title>Complex icons</title>
+    <title>My PhotPrint</title>
     <style>
       html, body, #map-canvas {
         height: 100%;
@@ -32,8 +33,8 @@
 
 function initialize() {
   var mapOptions = {
-    zoom: 10,
-    center: new google.maps.LatLng(-33.9, 151.2)
+    zoom: 5,
+    center: new google.maps.LatLng(40, -80)
   }
   var map = new google.maps.Map(document.getElementById('map-canvas'),
                                 mapOptions);
@@ -46,13 +47,12 @@ function initialize() {
  * the order in which these markers should display on top of each
  * other.
  */
-var beaches = [
-  ['Bondi Beach', -33.890542, 151.274856, 4],
-  ['Coogee Beach', -33.923036, 151.259052, 5],
-  ['Cronulla Beach', -34.028249, 151.157507, 3],
-  ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
-  ['Maroubra Beach', -33.950198, 151.259302, 1]
-];
+ 
+ var beaches = new Array();
+ <c:forEach var="myLocations" items="${myLocations}">
+ var i = 0;
+ beaches[i++] = ['${myLocations.location}', '${myLocations.lat}', '${myLocations.lng}'];
+ </c:forEach>
 
 function setMarkers(map, locations) {
   // Add markers to the map
@@ -64,16 +64,12 @@ function setMarkers(map, locations) {
   // Origins, anchor positions and coordinates of the marker
   // increase in the X direction to the right and in
   // the Y direction down.
-  var image = 'hahah.jpg';
+  var image = 'haha.jpg';
   // Shapes define the clickable region of the icon.
   // The type defines an HTML &lt;area&gt; element 'poly' which
   // traces out a polygon as a series of X,Y points. The final
   // coordinate closes the poly by connecting to the first
   // coordinate.
-  var shape = {
-      coords: [1, 1, 1, 20, 18, 20, 18 , 1],
-      type: 'poly'
-  };
   for (var i = 0; i < locations.length; i++) {
     var beach = locations[i];
     var myLatLng = new google.maps.LatLng(beach[1], beach[2]);
@@ -81,9 +77,7 @@ function setMarkers(map, locations) {
         position: myLatLng,
         map: map,
         icon: image,
-        shape: shape,
         title: beach[0],
-        zIndex: beach[3]
     });
   }
 }
@@ -100,12 +94,13 @@ google.maps.event.addDomListener(window, 'load', initialize);
 <div class="container">
 <div class="container">
 <div class="container">
-
   <h3>${user.userName}'s PhotPrint</h3>
-  <c:forEach var="photos" items="${photos}"> 
+  <c:forEach var="myLocations" items="${myLocations}"> 
+  
   <form action="viewPhotos.do" method="POST">             		
-       		<a href= "viewPhotos.do?id=${photos.location}">${photos.location}</a>
-  </form>  
+       		<a href= "viewPhotos.do?id=${myLocations.location}">${myLocations.location}</a>
+  </form> 
+  
   </br>
   </c:forEach>   	
   </br>
