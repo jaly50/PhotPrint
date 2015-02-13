@@ -116,6 +116,7 @@ public class UploadAction extends Action {
 			photo.setOwner(user.getUserName());
 			photo.setLocation(form.getLocation());
 			photoDAO.create(photo);
+			request.setAttribute("description", form.getDescription());
 			
 		
 

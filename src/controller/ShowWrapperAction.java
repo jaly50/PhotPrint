@@ -22,7 +22,9 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
 
 import model.Model;
+import model.PhotoDAO;
 import model.Photo_FavorDAO;
+import model.UserDAO;
 
 import org.genericdao.RollbackException;
 import org.mybeans.form.FormBeanException;
@@ -42,7 +44,9 @@ import databeans.WrapperTable;
 public class ShowWrapperAction extends Action {
 	private FormBeanFactory<ShowWrapper> formBeanFactory = FormBeanFactory
 			.getInstance(ShowWrapper.class);
-
+	
+	private UserDAO  userDAO;
+	private PhotoDAO photoDAO;
 	private static Photo_FavorDAO photo_FavorDAO;
 
 	static String apiKey = "b64b6e7af8762bd7b36eb3efe360fbf0";
@@ -55,6 +59,8 @@ public class ShowWrapperAction extends Action {
 	static int[] count_dislike;
 
 	public ShowWrapperAction(Model model) {
+		userDAO  = model.getUserDAO();
+		photoDAO = model.getPhotoDAO();
 		photo_FavorDAO = model.getPhoto_FavorDAO();
 	}
 
@@ -66,9 +72,16 @@ public class ShowWrapperAction extends Action {
 		List<String> errors = new ArrayList<String>();
 		String message;
 		request.setAttribute("errors", errors);
-
+		String description = (String) request.getAttribute("description");
+		int countTags = 0;
+		for (int i = 0; i < description.length(); i++ ) {
+			if (description.charAt(i) == '#')
+				countTags ++;
+		}
+		
+		
 		HttpSession session = request.getSession();
-
+		
 		try {
 			ShowWrapper form;
 			form = formBeanFactory.create(request);
