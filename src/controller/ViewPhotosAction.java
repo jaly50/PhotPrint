@@ -55,10 +55,6 @@ public class ViewPhotosAction extends Action {
 			ViewPhotosForm form = formBeanFactory.create(request);
 			request.setAttribute("form", form);
 							
-			// if no parameters passed in
-			if (!form.isPresent()) {
-				return "view-photprint.jsp";
-			}
 							
 			// check error, if has
 			errors.addAll(form.getValidationErrors());
@@ -70,7 +66,8 @@ public class ViewPhotosAction extends Action {
 			String location = form.getLocation();
 			Photo[] photos = 
 					photoDAO.getPhotoWithOwnerAndLocation(user.getUserName(), location);
-							
+			
+			System.out.println(photos);
 			if (photos == null || photos.length == 0) {
 				errors.add("Photo item does not exist");
 				return "view-photprint.jsp";
@@ -78,6 +75,8 @@ public class ViewPhotosAction extends Action {
 							
 			// set photos attribute
 			request.setAttribute("photos", photos);
+			request.setAttribute("description", photos[0].getDescription());
+			request.setAttribute("location", location);
 			return "view-photos.jsp";
 					
 		} catch (FormBeanException e) {

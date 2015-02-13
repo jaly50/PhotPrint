@@ -98,7 +98,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
   <c:forEach var="myLocations" items="${myLocations}"> 
   
   <form action="viewPhotos.do" method="POST">             		
-       		<a href= "viewPhotos.do?id=${myLocations.location}">${myLocations.location}</a>
+       		<a href= "viewPhotos.do?location=${myLocations.location}">${myLocations.location}</a>
   </form> 
   
   </br>
