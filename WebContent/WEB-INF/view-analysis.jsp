@@ -27,56 +27,69 @@
       // instantiates the pie chart, passes in the data and
       // draws it.
       function drawChart() {
-
-    	  var data = google.visualization.arrayToDataTable([
-    	                                                    ['Place',          'Number of Photos'],
-    	                                                    <c:forEach items="${locationsData}" var="place"> 
-    	            										,[${place.location}, ${place.number}]
-    	            										</c:forEach>
-    	                                                  ]);
-
-    	                                                  var options = {
-    	                                                    title: 'Population of Largest U.S. Cities',
-    	                                                    width: 1000,
-    	                                                    height: 563,
-    	                                                    hAxis: {
-    	                                                      title: 'Total Population',
-    	                                                      minValue: 0
-    	                                                    },
-    	                                                    vAxis: {
-    	                                                      title: 'City'
-    	                                                    }
-    	                                                  };
+    	   var data = google.visualization.arrayToDataTable([
+    	                                             	  	['Location',          'Number of Photos']
+    	                                             	    <c:forEach  var="locationsData" items="${locationsData}"> 
+    	                                             	    ,['${locationsData.location}', ${locationsData.number}]
+    	                                             	    </c:forEach>
+    	                                             	    ]);
+    	                                             	  
+    	   
+    	   var options = {
+    	      title: 'My PhotPrint Analysis',
+    	      width: 1000,
+    	      height: 563,
+    	      hAxis: {
+    	      title: 'Number of Photos',
+    	      minValue: 0
+    	       },
+    	      vAxis: {
+    	      title: 'Location'
+    	      }
+    	     
+    	  };
         // Instantiate and draw our chart, passing in some options.
         var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
         chart.draw(data, options);
-      }
+      };
     </script>
   </head>
 <body>
     
 <div class="container">
   <h3>${user.userName}'s PhotPrint Analysis</h3>
+  <!--Div that will hold the pie chart-->
+    <div id="chart_div"></div>
   <c:forEach var="locationsData" items="${locationsData}">  
-  <form action="viewAnalysisDetail.do" method="POST">         
-  			<c:out value = '${locationsData.location}' escapeXml='true' />    		
-  </form> 
-  	
-  	<p> Number of Photos: <c:out value = '${locationsData.number}' escapeXml='true' /></p>
-  	
-  		<c:forEach var = "tag" items="${locationsData.tags}">
-  			<form action="viewAnalysisDetail.do" method="POST">             		
-       			<a href= "viewAnalysisDetail.do?tag=${tag}">${tag}</a>
-       			<input type="hidden" name="location" value="${locationsData.location}">
-  			</form> 
-  		</c:forEach>
-  	
+   
+   <h4> Location: ${locationsData.location} &nbsp&nbsp&nbsp&nbsp
+    Number of Photos: ${locationsData.number}  
+   </h4>       	  	
+  	<form action="viewAnalysisDetail.do" method="POST">  
+  		<input type="hidden" name="location" value="${locationsData.location}"/> 	
+  		<table class="table table-bordered">
+    <thead>
+    <tr>
+    <td align="center"><p style = "color: green">My Posted Tag at ${locationsData.location}</p></td>
+    <td align="center"><p style = "color: green">Select</p></td>
+    </thead>
+    <tbody>     
+     <c:forEach var="tag" items="${locationsData.tags}">    
+      <tr>
+        <td align="center">${tag}</td>
+        <td align="center"><input type="radio" name="tag" value="${tag}"/></td>
+      </tr>
+	</c:forEach>
+    </tbody>
+    
+  </table>
+		<h4 align="center"><input type="submit" name="button" value="View Tag Analysis"/></h4>
+  	</form> 
   	</br>
   	</br>
   </c:forEach>   	
   </br>
-  <!--Div that will hold the pie chart-->
-    <div id="chart_div"></div>
+  
 </div>
 <jsp:include page="template-bottom.jsp" />
   </body>

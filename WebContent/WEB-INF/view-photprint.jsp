@@ -21,7 +21,7 @@
     <style>
       html, body, #map-canvas {
         height: 100%;
-        margin: 0px;
+        margin: 10px;
         padding: 0px
       }
     </style>
@@ -47,11 +47,9 @@ function initialize() {
  * the order in which these markers should display on top of each
  * other.
  */
- 
  var beaches = new Array();
- <c:forEach var="myLocations" items="${myLocations}">
- var i = 0;
- beaches[i++] = ['${myLocations.location}', '${myLocations.lat}', '${myLocations.lng}'];
+ <c:forEach  var="myLocations" items="${myLocations}"> 
+ beaches.push(['${myLocations.location}', ${myLocations.lat}, ${myLocations.lng}]);
  </c:forEach>
 
 function setMarkers(map, locations) {
@@ -64,7 +62,7 @@ function setMarkers(map, locations) {
   // Origins, anchor positions and coordinates of the marker
   // increase in the X direction to the right and in
   // the Y direction down.
-  var image = 'haha.jpg';
+  var image = 'foot.jpg';
   // Shapes define the clickable region of the icon.
   // The type defines an HTML &lt;area&gt; element 'poly' which
   // traces out a polygon as a series of X,Y points. The final
@@ -92,31 +90,17 @@ google.maps.event.addDomListener(window, 'load', initialize);
 <!-- This is a very simple parallax effect achieved by simple CSS 3 multiple backgrounds, made by http://twitter.com/msurguy -->
 
 <div class="container">
-<div class="container">
-<div class="container">
-  <h3>${user.userName}'s PhotPrint</h3>
-  <c:forEach var="myLocations" items="${myLocations}"> 
-  
-  <form action="viewPhotos.do" method="POST">             		
-       		<a href= "viewPhotos.do?location=${myLocations.location}">${myLocations.location}</a>
+  <h3>${user.userName}'s PhotPrint&nbsp&nbsp&nbsp&nbsp<a href="viewAnalysis.do">View Location Analysis</a></h3>
+  </br>
+  <c:forEach var="myLocations" items="${myLocations}">   
+  <form action="viewPhotos.do" method="POST">
+  			<c:out value = '${myLocations.location}' escapeXml='true' />                		
+       		<a href= "viewPhotos.do?location=${myLocations.location}">View Photos</a>
   </form> 
-  
-  </br>
   </c:forEach>   	
-  </br>
-<h3><a href="viewAnalysis.do">View Analysis</a></h3>
-  
+<div id="map-canvas"></div>  
 </div>
-</div>
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-</div>
-<div id="map-canvas"style="width: 1000px; height: 800px"></div>
+
 <jsp:include page="template-bottom.jsp" />
     
   </body>

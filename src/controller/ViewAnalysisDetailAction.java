@@ -76,8 +76,7 @@ public class ViewAnalysisDetailAction extends Action {
 			
 			String tag = form.getTag();
 			System.out.println("TTTTTTTTTTTTT" + tag);
-			String location = "Pittsburgh, PA, United States";
-//			String location = form.getLocation();
+			String location = form.getLocation();
 			System.out.println("LLLLLLLLLLLLLL" + location);
 			request.setAttribute("tag", tag);
 			request.setAttribute("location", location);
