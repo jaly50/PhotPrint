@@ -105,7 +105,8 @@ public class ViewAnalysisAction extends Action {
 		while (i < desc.length()) {
 			StringBuilder item = new StringBuilder();
 			while (i < desc.length()) {
-				if (desc.charAt(i) == ' ') continue;
+//No white space!!!				
+//				if (desc.charAt(i) == ' ') continue;
 				if (desc.charAt(i) == '#') {
 					i++;
 					break;

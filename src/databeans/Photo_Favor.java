@@ -3,9 +3,10 @@ package databeans;
 import org.genericdao.PrimaryKey;
 
 
-@PrimaryKey("photo")
+@PrimaryKey("photo_id")
 
 public class Photo_Favor {
+	private int photo_id;
 	private String photo;//.jpg to show pic
 	private String url; // href to website
 	private String location;
@@ -13,6 +14,12 @@ public class Photo_Favor {
 	private int count_like;
 	private int count_dislike;
 	
+	public int getPhoto_id() {
+		return photo_id;
+	}
+	public void setPhoto_id(int i) {
+		photo_id = i;
+	}
 	public String getPhoto() {
 		return photo;
 	}
