@@ -41,7 +41,7 @@ public class Photo_FavorDAO extends GenericDAO<Photo_Favor> {
 		if (list == null || list.length < 1) {
 			return 0;
 		}
-		int count_like = list[list.length-1].getCount_like();
+		int count_like = list[list.length-1].getCount_Like();
 		
 		return count_like;
 	}

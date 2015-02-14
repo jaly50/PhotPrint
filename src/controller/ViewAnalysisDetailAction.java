@@ -50,7 +50,6 @@ public class ViewAnalysisDetailAction extends Action {
 		
 	// return next page name
 	public String perform(HttpServletRequest request) {
-		System.out.println("here");
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
 			
@@ -71,11 +70,15 @@ public class ViewAnalysisDetailAction extends Action {
 			// check error, if has
 			errors.addAll(form.getValidationErrors());
 			if (errors.size() > 0) {
+				
 				return "view-analysis-detail.jsp";
 			}
 			
 			String tag = form.getTag();
-			String location = form.getLocation();
+			System.out.println("TTTTTTTTTTTTT" + tag);
+			String location = "Pittsburgh, PA, United States";
+//			String location = form.getLocation();
+			System.out.println("LLLLLLLLLLLLLL" + location);
 			request.setAttribute("tag", tag);
 			request.setAttribute("location", location);
 			
@@ -90,15 +93,21 @@ public class ViewAnalysisDetailAction extends Action {
 			
 			Comparator<Photo_Favor> comparator = new Comparator<Photo_Favor>() {
 				public int compare(Photo_Favor p1, Photo_Favor p2) {
-					return p1.getCount_like() - p2.getCount_like();
+					return p1.getCount_Like() - p2.getCount_Like();
 				}
 			};
 			Arrays.sort(photoFavors, comparator);
 			
 			if (photoFavors.length > 5) {
 				Photo_Favor[] less = Arrays.copyOf(photoFavors, 5);
+				for (int i = 0; i < less.length; i++) {
+					System.out.println(less[i].getUrl());
+				}				
 				request.setAttribute("photoFavors", less);
 			} else {
+				for (int i = 0; i < photoFavors.length; i++) {
+					System.out.println(photoFavors[i].getUrl());
+				}	
 				request.setAttribute("photoFavors", photoFavors);
 			}
 			return "view-analysis-detail.jsp";

@@ -58,7 +58,11 @@
 <div class="container">
   <h3>${location} ${tag} Analysis</h3>
   <c:forEach var="photoFavors" items="${photoFavors}">  
-  	<c:out value = '${photoFavors.url}' escapeXml='true' />
+  <c:out value = '${locationsData.location}' escapeXml='true' />   
+  <c:out value = '${photoFavors.count_Like}' escapeXml='true' />
+  <a href= "javascript:urlClick('${photoFavors.url}')">
+       					<c:out value = '${photoFavors.url}' escapeXml='true' /></a>
+  
   	</br>
   	</br>
   </c:forEach>   	
