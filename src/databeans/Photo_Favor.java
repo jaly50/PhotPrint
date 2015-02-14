@@ -3,19 +3,22 @@ package databeans;
 import org.genericdao.PrimaryKey;
 
 
-@PrimaryKey("photo_id")
+@PrimaryKey("photo")
 
 public class Photo_Favor {
-	private String photo_id;
+	private String photo;//.jpg to show pic
+	private String url; // href to website
+	private String location;
+	private String tag;
 	private int count_like;
 	private int count_dislike;
-
-	public String getPhoto_id() {
-		return photo_id;
+	
+	public String getPhoto() {
+		return photo;
 	}
 
-	public void setPhoto_id(String photo_id) {
-		this.photo_id = photo_id;
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 
 	public int getCount_like() {
@@ -33,5 +36,32 @@ public class Photo_Favor {
 	public void setCount_Dislike(int count_dislike) {
 		this.count_dislike = count_dislike;
 	}
+
+	
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public String getTag() {
+		return tag;
+	}
+
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
+
+	
 
 }

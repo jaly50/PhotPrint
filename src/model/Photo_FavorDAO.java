@@ -6,6 +6,7 @@ import org.genericdao.GenericDAO;
 import org.genericdao.MatchArg;
 import org.genericdao.RollbackException;
 
+import databeans.Photo;
 import databeans.Photo_Favor;
 
 public class Photo_FavorDAO extends GenericDAO<Photo_Favor> {
@@ -35,8 +36,8 @@ public class Photo_FavorDAO extends GenericDAO<Photo_Favor> {
 	}
 	
 	
-	public int getCount_Like(String photo_id) throws RollbackException {
-		Photo_Favor[] list = match(MatchArg.equals("photo_id", photo_id));
+	public int getCount_Like(String photo) throws RollbackException {
+		Photo_Favor[] list = match(MatchArg.equals("photo", photo));
 		if (list == null || list.length < 1) {
 			return 0;
 		}
@@ -46,8 +47,8 @@ public class Photo_FavorDAO extends GenericDAO<Photo_Favor> {
 	}
 	
 	
-	public int getCount_Dislike(String photo_id) throws RollbackException {
-		Photo_Favor[] list = match(MatchArg.equals("photo_id", photo_id));
+	public int getCount_Dislike(String photo) throws RollbackException {
+		Photo_Favor[] list = match(MatchArg.equals("photo", photo));
 		if (list == null || list.length < 1) {
 			return 0;
 		}
@@ -55,5 +56,15 @@ public class Photo_FavorDAO extends GenericDAO<Photo_Favor> {
 		
 		return count_Dislike;
 	}
-
+	
+	public Photo_Favor[] getPhotos(String tag, String location)
+			throws RollbackException {
+		MatchArg matchArg1 = MatchArg.equals("tag", tag);
+		MatchArg matchArg2 = MatchArg.equals("location", location);
+		Photo_Favor[] photos = match(MatchArg.and(matchArg1, matchArg2));
+		if (photos == null) {
+			return null;
+		}
+		return photos;
+	}
 }

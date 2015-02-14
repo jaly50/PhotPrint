@@ -65,15 +65,57 @@ public class ViewAnalysisAction extends Action {
 			Set<String> keySet = map.keySet();
 			ArrayList<LocationData> locationsData = new ArrayList<LocationData>();
 			for (String s : keySet) {
-				LocationData locationData = new LocationData(s, map.get(s));
+				ArrayList<String> tags = new ArrayList<String>();
+				Photo[] photoTemp = photoDAO.getPhotoWithOwnerAndLocation(user.getUserName(), s);
+				for (int j = 0; j < photoTemp.length; j++) {
+					ArrayList<String> tagsTemp = parseTags(photoTemp[j].getDescription());
+					System.out.println("TagsTemp " + tagsTemp);
+					if (tagsTemp == null || tagsTemp.size() == 0) continue;
+					for (int k = 0; k < tagsTemp.size(); k++) {
+						if (!tags.contains(tagsTemp.get(k))) tags.add(tagsTemp.get(k));
+					}
+					
+				}
+				LocationData locationData = new LocationData(s, map.get(s), tags);
 				locationsData.add(locationData);
 			}
+			
+			// test
+			for (int i = 0; i < locationsData.size(); i++) {
+				System.out.println("GGGGGG" + locationsData.get(i).getTags());
+			}
+			
 			request.setAttribute("locationsData", locationsData);
 			return "view-analysis.jsp";
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
 			return "view-analysis.jsp";
 		}
+	}
+	
+	public ArrayList<String> parseTags(String desc) {
+		ArrayList<String> res = new ArrayList<String>();
+		if (desc == null || desc.length() == 0) return res;
+		int i = 0;
+		while (i < desc.length() && desc.charAt(i) != '#') {
+			i++;
+		}
+		if (i == desc.length()) return res;
+		i++;
+		while (i < desc.length()) {
+			StringBuilder item = new StringBuilder();
+			while (i < desc.length()) {
+				if (desc.charAt(i) == ' ') continue;
+				if (desc.charAt(i) == '#') {
+					i++;
+					break;
+				}
+				item.append(desc.charAt(i));
+				i++;
+			}
+			if (item != null || item.length() != 0) res.add(item.toString());
+		}
+		return res;		
 	}
 }
 

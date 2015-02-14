@@ -56,21 +56,9 @@
 <body>
     
 <div class="container">
-  <h3>${user.userName}'s PhotPrint Analysis</h3>
-  <c:forEach var="locationsData" items="${locationsData}">  
-  <form action="viewAnalysisDetail.do" method="POST">             		
-       		<a href= "viewAnalysisDetail.do?id=${locationsData.location}">${locationsData.location}</a>
-  </form> 
-  	
-  	<c:out value = '${locationsData.number}' escapeXml='true' />
-  	
-  		<c:forEach var = "tag" items="${locationsData.tags}">
-  			<form action="viewAnalysisDetail.do" method="POST">             		
-       			<a href= "viewAnalysisDetail.do?id=${tag}">${tag}</a>
-       			<input type="hidden" name="id" value="${locationsData.location}">
-  			</form> 
-  		</c:forEach>
-  	
+  <h3>${location} ${tag} Analysis</h3>
+  <c:forEach var="photoFavors" items="${photoFavors}">  
+  	<c:out value = '${photoFavors.url}' escapeXml='true' />
   	</br>
   	</br>
   </c:forEach>   	
