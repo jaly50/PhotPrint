@@ -12,14 +12,10 @@
 
 <!-- bootstrap just to have good looking page -->
 <script src="bootstrap/js/bootstrap.min.js"></script>
-<link href="bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet" />
 
-<!-- we code these -->
-<link href="css/dropzone.css" type="text/css" rel="stylesheet" />
 <script src="js/myuploadfunction.js"></script>
 
-<!-- header style ignore it -->
-<link href="css/mystyle.css" rel="stylesheet">
+
 <link href="css/style.css" rel="stylesheet">
 
 <script
@@ -124,5 +120,4 @@
 			</form>
 </div>
 
-</body> 
-</html>
+

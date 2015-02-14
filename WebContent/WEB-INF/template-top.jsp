@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,6 +28,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
+        
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -42,12 +44,20 @@
                 id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a href="manage.do">Upload</a></li>
-                    <li><a href="upload.do">Services</a></li>
                     <li><a href="viewPhotPrint.do">My PhotPrint</a></li>
+                   
+                   
                 </ul>
+                	<c:choose>
+							<c:when test="${ (!empty user)}">
+                <p class="navbar-text navbar-right">Welcome, ${user.userName}&emsp;&emsp;&emsp;<a href="./logout" class="navbar-link">logout</a></p>
+           </c:when>
+						</c:choose>
             </div>
             <!-- /.navbar-collapse -->
+            
         </div>
+        <div class="clearfix"> </div>
         <!-- /.container -->
     </nav>
 

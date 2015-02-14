@@ -41,6 +41,11 @@ public class ManageAction extends Action {
 	public String getName() { return "manage.do"; }
 
 	public String perform(HttpServletRequest request) {
+		User user = (User) request.getSession(false).getAttribute("user");
+		if (user==null)
+			return "login.do";
+		
+		
         // Set up the errors list
         List<String> errors = new ArrayList<String>();
         request.setAttribute("errors",errors);
@@ -49,7 +54,7 @@ public class ManageAction extends Action {
             // Set up user list for nav bar
 			request.setAttribute("userList",userDAO.getUsers());
 
-			User user = (User) request.getSession(false).getAttribute("user");
+			
         	Photo[] photoList = photoDAO.getPhotos(user.getUserName());
 	        request.setAttribute("photoList",photoList);
 
