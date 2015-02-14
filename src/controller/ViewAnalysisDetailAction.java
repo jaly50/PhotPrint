@@ -93,7 +93,7 @@ public class ViewAnalysisDetailAction extends Action {
 			
 			Comparator<Photo_Favor> comparator = new Comparator<Photo_Favor>() {
 				public int compare(Photo_Favor p1, Photo_Favor p2) {
-					return p1.getCount_Like() - p2.getCount_Like();
+					return p2.getCount_Like() - p1.getCount_Like();
 				}
 			};
 			Arrays.sort(photoFavors, comparator);

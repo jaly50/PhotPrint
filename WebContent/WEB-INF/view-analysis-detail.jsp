@@ -13,6 +13,11 @@
 
 <html>
   <head>
+  <script LANGUAGE="JavaScript">
+		function urlClick(url, site) {
+		window.open(url);
+		window.location = site;}
+</script>
     <!--Load the AJAX API-->
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
