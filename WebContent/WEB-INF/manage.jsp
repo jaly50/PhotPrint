@@ -15,7 +15,8 @@
 	<div class="overlay">
 		<div class="well">
 			<!-- Form Name -->
-			<div class="text-center"><h3 style="font-family: 'Lucida Console', Monaco, monospace;">Upload tweet</h3></div>
+			<div class="text-center">
+			<h3 style="font-family: 'Lucida Console', Monaco, monospace;">Upload tweet</h3></div>
 			<hr>
 			<input id="fileupload" type="file" name="files[]" data-url="upload"
 				multiple>

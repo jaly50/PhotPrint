@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -105,6 +106,9 @@ public class UploadAction extends Action {
 				request.setAttribute("description", form.getDescription());
 	       }
 	        
+	       //Clean the cached files
+	       FileUploadServlet.files = new LinkedList<FileMeta>();
+	       
 	        return "manage.jsp";
 	 	} catch (RollbackException e) {
 			errors.add(e.getMessage());
@@ -138,11 +142,11 @@ public class UploadAction extends Action {
          for (int i=0; i<files.size(); i++) {
 	    	   FileMeta temp =files.get(i);
 	    	   byte[] bFile = temp.getBytes();
-	    	   File yourFile = new File(fixBadChars(form.getDescription()));
+	    	   File yourFile = new File(fixBadChars(form.getDescription())+i);
 		    	if(!yourFile.exists()) {
 		    	    yourFile.createNewFile();
 		    	} 
-		   // 	System.out.println(yourFile.getAbsolutePath());
+		    	System.out.println(yourFile.getAbsolutePath());
 				FileOutputStream fileOuputStream = 
 		                  new FileOutputStream(yourFile,false); 
 				

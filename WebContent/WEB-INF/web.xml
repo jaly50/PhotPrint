@@ -11,7 +11,7 @@
     </description>
     
     <servlet>
-        <servlet-name>    photo-controller        </servlet-name>
+        <servlet-name>    photPrint-controller        </servlet-name>
         <servlet-class>   controller.Controller   </servlet-class>
         <init-param>
           <param-name>    jdbcDriverName          </param-name> 
@@ -82,7 +82,7 @@
     
 
     <servlet-mapping>
-        <servlet-name>   photo-controller         </servlet-name>
+        <servlet-name>   photPrint-controller         </servlet-name>
         <url-pattern>    *.do                     </url-pattern>
     </servlet-mapping>
 

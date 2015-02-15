@@ -36,7 +36,6 @@ public class FileUploadServlet extends HttpServlet {
 		
 		// 1. Upload File Using Apache FileUpload
 		List<FileMeta> xy = MultipartRequestHandler.uploadByApacheFileUpload(request);
-		System.out.println(xy.size());
 		files.addAll(xy);
 		
 		// Remove some files

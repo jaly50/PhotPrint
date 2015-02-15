@@ -26,19 +26,6 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
-.well{
-	font-family: 'Open Sans', sans-serif;
-	font-size: 14px;
-	color: black;
-	font-weight: normal;
-	line-height: 20px;
-	margin-top: 0px;
-	width:700px;
-    height:35em;
-    padding:20px;
-	left: 50%;
-	margin-left: 19em; /*set to a negative number 1/2 of your width*/
-}
 section {
     padding-top: 80px;
     padding-bottom: 120px;
@@ -110,7 +97,7 @@ section {
 	line-height: 20px;
 	margin-top: 0px;
 	width:700px;
-    height:35em;
+
     padding:20px;
 	left: 50%;
 	margin-left: 19em; /*set to a negative number 1/2 of your width*/
