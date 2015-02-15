@@ -57,21 +57,22 @@
 <body>
     
 <div class="container">
-  <h3><b>${user.userName}'s PhotPrint Analysis</h3>
+  <br>
+  <h3><strong><font face="arial" color="teal">${user.userName}'s PhotPrint Analysis</font></strong></h3>
   <!--Div that will hold the pie chart-->
     <div id="chart_div"></div>
   <c:forEach var="locationsData" items="${locationsData}">  
    
-   <h4> Location: ${locationsData.location} &nbsp&nbsp&nbsp&nbsp
-    Number of Photos: ${locationsData.number}  
+   <h4> <strong><font face="arial" color="teal">${locationsData.location} &nbsp&nbsp&nbsp&nbsp
+    Number of Photos: ${locationsData.number}  </font></strong> 
    </h4>       	  	
   	<form action="viewAnalysisDetail.do" method="POST">  
   		<input type="hidden" name="location" value="${locationsData.location}"/> 	
   		<table class="table table-bordered">
     <thead>
     <tr>
-    <td align="center"><p style = "color: green">My Posted Tag at ${locationsData.location}</p></td>
-    <td align="center"><p style = "color: green">Select</p></td>
+    <td align="center"><strong><font face="arial">My Posted Tag at ${locationsData.location}</font></strong></td>
+    <td align="center"><strong><font face="arial">Select</font></strong></td>
     </thead>
     <tbody>     
      <c:forEach var="tag" items="${locationsData.tags}">    

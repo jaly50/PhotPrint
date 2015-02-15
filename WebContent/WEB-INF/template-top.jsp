@@ -44,7 +44,7 @@
 					<li><a href="index.do">HOME</a></li>
 					<li><a href="manage.do">UPLOAD</a></li>
 					<li><a href="viewPhotPrint.do">ANALYSIS</a></li>
-					<li><a href="search.do">PICTURES</a></li>
+					<li><a href="search.do">SEARCH</a></li>
 				</ul>
 				
 			</div>

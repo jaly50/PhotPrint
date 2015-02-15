@@ -6,7 +6,8 @@
 </br>
 </br>
 <div class="container">
-<h3 align="center"><b>${user.userName} said &quot;${description}&quot; in ${location}</h3>
+<h3 align="center"> <strong><font face="arial" color="teal">${user.userName} said &quot;${description}&quot; in ${location}</font></strong> 
+   </h3>       	  	
 </br>
 </br>
 <div>
