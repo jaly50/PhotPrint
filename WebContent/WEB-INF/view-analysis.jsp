@@ -57,7 +57,7 @@
 <body>
     
 <div class="container">
-  <h3>${user.userName}'s PhotPrint Analysis</h3>
+  <h3><b>${user.userName}'s PhotPrint Analysis</h3>
   <!--Div that will hold the pie chart-->
     <div id="chart_div"></div>
   <c:forEach var="locationsData" items="${locationsData}">  
