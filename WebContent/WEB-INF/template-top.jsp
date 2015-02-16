@@ -43,10 +43,10 @@
 			</div>
 			<div class="navbar-collapse collapse navbar-left scroll-me">
 				<ul class="nav navbar-nav ">
-					<li><a href="index.do">HOME</a></li>
-					<li><a href="manage.do">UPLOAD</a></li>
-					<li><a href="viewPhotPrint.do">ANALYSIS</a></li>
-					<li><a href="search.do">SEARCH</a></li>
+					<li><a href="index.do">Home</a></li>
+					<li><a href="manage.do">Upload</a></li>
+					<li><a href="viewPhotPrint.do">Analysis</a></li>
+					<li><a href="search.do">Search</a></li>
 					<li><a href="showTweet.do">MyTwitter</a></li>
 				</ul>
 				
