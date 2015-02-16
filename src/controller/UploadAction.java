@@ -123,7 +123,7 @@ public class UploadAction extends Action {
 			// Clean the cached files
 			FileUploadServlet.files = new LinkedList<FileMeta>();
 
-			return "showWrapper.do";
+			return "showTweet.jsp";
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
 			return "manage.jsp";
