@@ -32,10 +32,16 @@ public class Photo_FavorDAO extends GenericDAO<Photo_Favor> {
 		try {
 			Photo_Favor[] list = match(MatchArg.equals("photo",
 					photo_Favor.getPhoto()));
+			
 			if (list == null || list.length < 1) {
+				//System.out.println(list[0].getPhoto());
+				//System.out.println("PHDAO36 Create" + photo_Favor.getPhoto());
 				createPhotoFavor(photo_Favor);
-			} else
+			} else {
+				//System.out.println("PHDAO39 Update" + photo_Favor.getPhoto());
 				update(photo_Favor);
+			}
+				
 		} catch (RollbackException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -109,8 +115,8 @@ public class Photo_FavorDAO extends GenericDAO<Photo_Favor> {
 	
 	public Photo_Favor[] getWrappers(String location, String tag)
 			throws RollbackException {
-		System.out.println("location " + location);
-		System.out.println("tag " + tag);
+		System.out.println("DAO location: " + location);
+		System.out.println("DAO tag: " + tag);
 		MatchArg matchArg1 = MatchArg.equals("tag", tag);
 		MatchArg matchArg2 = MatchArg.equals("location", location);
 		Photo_Favor[] photos = match(MatchArg.and(matchArg1, matchArg2));

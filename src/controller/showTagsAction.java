@@ -40,7 +40,7 @@ public class showTagsAction extends Action {
 	public String perform(HttpServletRequest request) {
 		// get session
 		HttpSession session = request.getSession(false);
-		String location = "Europe";
+		String location = (String) session.getAttribute("location");
 		request.setAttribute("location", location);
 		TagsForm form;
 		
@@ -58,11 +58,11 @@ public class showTagsAction extends Action {
 			}
 			
 			String tag = form.getTag();
-			System.out.println("Tag Action location " + location);
-			System.out.println("Tag Action tag " + tag);
+			//System.out.println("Tag Action location " + location);
+			//System.out.println("Tag Action tag " + tag);
 			Photo_Favor[] photo_favor = photo_FavorDAO.getWrappers(location.trim(),tag.trim());
 			if (photo_favor==null || photo_favor.length == 0) {
-				System.out.println("Location 64");
+				//System.out.println("Location 64");
 				return "showTags.do";
 			}
 			System.out.println(66 + photo_favor[0].getPhoto());

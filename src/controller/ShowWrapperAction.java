@@ -39,6 +39,20 @@ import formbeans.ShowWrapper;
 import databeans.Photo_Favor;
 import databeans.WrapperTable;
 
+import twitter4j.Query;
+import twitter4j.QueryResult;
+import twitter4j.Status;
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
+import twitter4j.conf.ConfigurationBuilder;
+import formbeans.ShowWrapper;
+import formbeans.UploadPhotoForm;
+import databeans.Photo_Favor;
+import databeans.TweetWrapperTable;
+import databeans.Tweetlist;
+import databeans.WrapperTable;
+
 /**
  * 
  */
@@ -54,6 +68,7 @@ public class ShowWrapperAction extends Action {
 	static String apiKey = "b64b6e7af8762bd7b36eb3efe360fbf0";
 	static String secret = "5afa0fdb4d420d3d";
 	static String per_page = "5";
+	static String filePath="searchPhoto.xml";
 	static int tagNum = 0;
 	static String[] photo;
 	static String[] url;
@@ -79,9 +94,29 @@ public class ShowWrapperAction extends Action {
 		request.setAttribute("errors", errors);
 		HttpSession session = request.getSession();
 		String description = (String) session.getAttribute("description");
-		//String description = "#goldman #wallstreet #wolf";
+		// String description = "#computer #electronic";
 		String location = (String) session.getAttribute("location");
-		//String location = "Europe";
+		System.out.println("SW84" + location);
+		System.out.println("SW85" + location.length());
+		int commaPos = 0;
+		// String location = "California";
+		for (; commaPos < location.length(); commaPos++) {
+			System.out.println("SW89" + commaPos);
+			if (location.charAt(commaPos) == ',') {
+				System.out.println("SW91" + commaPos);
+				break;
+			}
+			
+		}
+		System.out.println("SW95 commaPos" + commaPos);
+		String searchLocation = "";
+		System.out.println(commaPos);
+		System.out.println(location.length());
+		if ( commaPos != location.length() )
+			searchLocation = location.substring(0, commaPos);
+		else
+			searchLocation = location;
+		System.out.println("SWA 118: " + searchLocation);
 		int countTags = 0;
 		int[] tagPosition = new int[10];
 		Arrays.fill(tagPosition, 0);
@@ -112,7 +147,7 @@ public class ShowWrapperAction extends Action {
 			}
 			if (tagPosition[i] != 0 && tag == 1) {
 				end = tagPosition[i];
-				subString[j] = description.substring(start + 1, end - 1).trim();
+				subString[j] = description.substring(start + 1, end).trim();
 				start = end;
 				j++;
 				continue;
@@ -122,7 +157,6 @@ public class ShowWrapperAction extends Action {
 
 		}
 
-		
 		request.setAttribute("subString", subString);
 		request.setAttribute("location", location);
 		session.setAttribute("subString", subString);
@@ -131,17 +165,17 @@ public class ShowWrapperAction extends Action {
 		try {
 			ShowWrapper form;
 			form = formBeanFactory.create(request);
-			
+
 			request.setAttribute("showWrapper", form);
 			List<WrapperTable> WrapperTable = new ArrayList<WrapperTable>();
 			List<Photo_Favor> PhotoFavTable = new ArrayList<Photo_Favor>();
-			String tag1 = "Michael";
-			String tag2 = "Jordan";
+			List<Tweetlist> TweetWrapperTable = null;// new
+														// ArrayList<Tweetlist>();
 			if (countTags == 0)
-				searchPhoto(location, location);
+				searchPhoto(searchLocation, searchLocation);
 			else {
 				for (int m = 0; m < subString.length; m++) {
-					searchPhoto(location, subString[m]);
+					searchPhoto(searchLocation, subString[m]);
 					// set WrapperTable
 					for (int i = 0; i < photo.length; i++) {
 						WrapperTable wTableRow = new WrapperTable();
@@ -165,6 +199,8 @@ public class ShowWrapperAction extends Action {
 						photo_FavorDAO.updatePhotoFavor(pTableRow);
 					}
 				}
+				System.out.println("SWA 198 Twit Desc: " + description);
+				TweetWrapperTable = searchTweets(description);
 			}
 			// getPhotoInfo(tag1,tag2);
 
@@ -178,11 +214,12 @@ public class ShowWrapperAction extends Action {
 			 */
 
 			request.setAttribute("WrapperTable", WrapperTable);
+			request.setAttribute("Tweetlist", TweetWrapperTable);
 			if (!form.isPresent()) {
 				return "showWrapper.jsp";
 			}
 
-			//System.out.println("ShowWrapper");
+			// System.out.println("ShowWrapper");
 
 		} catch (IOException | XMLStreamException e) {
 			// TODO Auto-generated catch block
@@ -206,7 +243,81 @@ public class ShowWrapperAction extends Action {
 
 	/*******************************************************************************/
 
-	// 1. search photo by key words.
+	// 1. search tweet by key words.
+	public static List<Tweetlist> searchTweets(String desc) {
+		try {
+
+			ConfigurationBuilder cb = new ConfigurationBuilder();
+			cb.setDebugEnabled(true)
+					.setOAuthConsumerKey("xMVoz5JYv3EZU7mpf6oDIYnry")
+					.setOAuthConsumerSecret(
+							"shjy1fS7pRX1qZkjO3qzpYmnxYYajD4CfvLAZfoLvWV6dxuDy4")
+					.setOAuthAccessToken(
+							"3023934688-ieFb0F0iPvy32B5hbva6irYC6yKWd8PnKbkgdll")
+					.setOAuthAccessTokenSecret(
+							"H3ViKZSHYOE4kjUuIXIVHxbN4qKlxZlK1wgJQzvt0dfd1");
+			TwitterFactory tf = new TwitterFactory(cb.build());
+			Twitter twitter = tf.getInstance();
+			List<Tweetlist> tl = new ArrayList<Tweetlist>();
+			List<Status> tweets = null;
+			// try {
+			// String s[]=desc.split("#");
+
+			String k = "#dance#dinner";
+			String s[] = k.split("#");
+			String c = "";
+			for (String b : s)
+				c = c + " " + b;
+			System.out.println("Value of query string is" + c);
+			Query query = new Query(c);
+			query.count(100);
+			QueryResult result;
+
+			int i = 0;
+			do {
+				result = twitter.search(query);
+
+				tweets = result.getTweets();
+				// System.out.println();
+				for (Status tweet : tweets) {
+					if (i > 25)
+						break;
+					Tweetlist ll = new Tweetlist();
+					ll.setUserScreenName(tweet.getUser().getScreenName());
+					String ut = tweet.getText();
+					int j = ut.indexOf("http://");
+					ut = ut.substring(0, i);
+					System.out.println(ut);
+					ll.setUserTweet(ut);
+					// tweetlistDAO.create(ll);
+					tl.add(ll);
+					i++;
+					// tl=tweetlistDAO.getTweets();
+					System.out.println("@" + tweet.getUser().getScreenName()
+							+ " - " + tweet.getText());
+				}
+				if (i > 25)
+					break;
+
+				System.out.println("Checking tweets fetch");
+				for (Tweetlist t : tl)
+					System.out.println(t.getUserScreenName() + "--"
+							+ t.getUserTweet());
+			} while ((query = result.nextQuery()) != null);
+
+			// System.exit(0);
+			return tl;
+
+		} catch (TwitterException te) {
+			te.printStackTrace();
+			System.out.println("Failed to search tweets: " + te.getMessage());
+			System.exit(-1);
+		}
+		return null;
+	}
+
+	/*******************************************************************************/
+	// 2.searchPhoto
 	public static void searchPhoto(String tag1, String tag2)
 			throws MalformedURLException, IOException, XMLStreamException {
 
@@ -241,7 +352,7 @@ public class ShowWrapperAction extends Action {
 		BufferedReader br = new BufferedReader(new InputStreamReader(
 				uc.getInputStream()));
 		BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
-				"/Users/Charlotte/Documents/picturesfortest/searchPhoto.xml")));
+				filePath)));
 
 		String nextline;
 		String[] servers = new String[count];
@@ -263,7 +374,7 @@ public class ShowWrapperAction extends Action {
 		br.close();
 		bw.close();
 
-		String filename = "/Users/Charlotte/Documents/picturesfortest/searchPhoto.xml";
+		String filename = filePath;
 		XMLInputFactory factory = XMLInputFactory.newInstance();
 
 		XMLEventReader r = factory.createXMLEventReader(filename,
@@ -299,23 +410,22 @@ public class ShowWrapperAction extends Action {
 				}
 			}
 		}
-		
 
 		for (int j = 0; j < i + 1; j++) {
 			String photorurl = "http://static.flickr.com/" + servers[j] + "/"
 					+ ids[j] + "_" + secrets[j] + ".jpg";
-			
+
 			// get photo[]
 			photo[j] = photorurl;
-			
+
 			// get count_like
 			try {
 				count_like[j] = photo_FavorDAO.getCount_Like(photo[j]);
 			} catch (RollbackException e) {
-				
+
 				e.printStackTrace();
 			}
-			
+
 			// get count_dislike
 			try {
 				count_dislike[j] = photo_FavorDAO.getCount_Dislike(photo[j]);
@@ -323,14 +433,14 @@ public class ShowWrapperAction extends Action {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 		}
 
 		getPhotoInfo(ids, secrets);
 	}
 
 	/********************************************************************************/
-	// 2. get photo information by photo id and secret.
+	// 3. get photo information by photo id and secret.
 	@SuppressWarnings("null")
 	public static void getPhotoInfo(String[] ids, String[] secrets)
 			throws XMLStreamException, MalformedURLException, IOException {
@@ -340,7 +450,7 @@ public class ShowWrapperAction extends Action {
 		ids = new String[count];
 		secrets = new String[count];
 
-		String filename = "/Users/Charlotte/Documents/picturesfortest/searchPhoto.xml";
+		String filename = filePath;
 		XMLInputFactory factory = XMLInputFactory.newInstance();
 
 		XMLEventReader r = factory.createXMLEventReader(filename,
@@ -380,7 +490,7 @@ public class ShowWrapperAction extends Action {
 		URLConnection[] ucs = new URLConnection[count];
 		for (int n = 0; n < count; n++)
 			ucs[n] = null;
-		
+
 		// write photo ids[m] to photo_id.xml
 		for (int m = 0; m < count; m++) {
 			ucs[m] = new URL("https://api.flickr.com/services/rest/?method="
@@ -390,7 +500,7 @@ public class ShowWrapperAction extends Action {
 			BufferedReader br = new BufferedReader(new InputStreamReader(
 					ucs[m].getInputStream()));
 			String newFileName = String.format(
-					"/Users/Charlotte/Documents/picturesfortest/searchPhoto.xml", ids[m]);
+					"Photo_%s.xml", ids[m]);
 			BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
 					newFileName)));
 
@@ -408,10 +518,10 @@ public class ShowWrapperAction extends Action {
 
 		// read photo files;
 		for (int m = 0; m < count; m++) {
-			
+
 			// System.out.println(ids[m]);
 			String infoFileName = String.format(
-					"/Users/Charlotte/Documents/picturesfortest/searchPhoto.xml", ids[m]);
+					"Photo_%s.xml", ids[m]);
 			String[] temp = new String[Integer.parseInt(per_page)];
 			int tag_num = 0;
 
@@ -443,7 +553,7 @@ public class ShowWrapperAction extends Action {
 				DocumentBuilder builder = domFactory.newDocumentBuilder();
 				Document doc = builder.parse(infoFileName);
 				doc.getDocumentElement().normalize();
-				
+
 				/*
 				 * NodeList urlList = doc.getElementsByTagName("url"); Node
 				 * urlNode = urlList.item(0); photo[m]=
@@ -462,7 +572,7 @@ public class ShowWrapperAction extends Action {
 					title[m] = titleNode.getTextContent().substring(0, 20);
 				else
 					title[m] = titleNode.getTextContent();
-				
+
 				// get tags
 				NodeList tagsList = doc.getElementsByTagName("tag");
 				String[] tagsTemp = new String[3];
@@ -472,11 +582,7 @@ public class ShowWrapperAction extends Action {
 
 				}
 				tags.add(tagsTemp);
-				
-				
-				
-				
-				
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

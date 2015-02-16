@@ -4,11 +4,17 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%	String[] subString = (String[])session.getAttribute("subString"); %>
 <%	String location = (String)session.getAttribute("location"); %>
-<jsp:include page="template-top.jsp" />
+<!DOCTYPE html>
+<html>
+<head>
+<title>PhotPrint</title>
 
+<link rel='stylesheet' href="css/bootstrap_ian.css" media='screen' />
+<link rel='stylesheet' href="css/style_ian.css"     media='screen' />
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="js/blocksit.min_ian.js"></script>
+
 <script>
 $(document).ready(function() {
 	//vendor script
@@ -64,9 +70,37 @@ $(document).ready(function() {
 </script>
 <link rel="shortcut icon" href="http://www.inwebson.com/wp-content/themes/inwebson2/favicn.ico" />
 <link rel="canonical" href="http://www.inwebson.com/demo/blocksit-js/demo2/" />
+</head>
+<body>
+
 <!-- Header -->
 
-
+<!-- NavBar  -->
+ <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Navigation</span> <span
+                        class="icon-bar"></span> <span class="icon-bar"></span> <span
+                        class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">PhotPrint</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse"
+                id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">Flickr</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+</nav>
 
 
 <!-- Content -->
@@ -75,12 +109,11 @@ $(document).ready(function() {
 <h2>PhotPrint</h2>
 <form action="showWrapper.do" method="POST">
 <p><a href="showWrapper.do"><strong>Location: </strong></a>${location}</p>
- </form>
+</form>
 <%
 	int i = 0;
 	for(; i < subString.length;i++)  {
-	
-			
+				
 			
 %>
 	<form action="showTags.do" method="POST">
@@ -105,6 +138,7 @@ $(document).ready(function() {
 
 <%} %>
 
+
 </hgroup>
 
 
@@ -128,15 +162,13 @@ $(document).ready(function() {
 	  </div>
 </c:forEach>
 
-<c:forEach var="twt" items="${Tweetlist}">    
-	   <div class="grid">
-	  <strong>${twt.userScreenName} </strong> 
-	  <strong>${twt.userTweet}</strong>
-      </div>
-</c:forEach>
+
+
 <!----> 
 </div>
-<div class="clearfix"></div>
 </section>
 
-<jsp:include page="template-bottom.jsp" />
+<!-- Footer -->
+
+</body>
+</html>
