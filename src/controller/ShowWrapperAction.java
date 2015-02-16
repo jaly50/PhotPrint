@@ -60,6 +60,8 @@ import databeans.WrapperTable;
 public class ShowWrapperAction extends Action {
 	private FormBeanFactory<ShowWrapper> formBeanFactory = FormBeanFactory
 			.getInstance(ShowWrapper.class);
+	private FormBeanFactory<UploadPhotoForm> formBeanFactory1 = FormBeanFactory
+			.getInstance(UploadPhotoForm.class);
 
 	private UserDAO userDAO;
 	private PhotoDAO photoDAO;
@@ -68,7 +70,7 @@ public class ShowWrapperAction extends Action {
 	static String apiKey = "b64b6e7af8762bd7b36eb3efe360fbf0";
 	static String secret = "5afa0fdb4d420d3d";
 	static String per_page = "5";
-	static String filePath="searchPhoto.xml";
+	static String filePath = "searchPhoto.xml";
 	static int tagNum = 0;
 	static String[] photo;
 	static String[] url;
@@ -106,13 +108,13 @@ public class ShowWrapperAction extends Action {
 				System.out.println("SW91" + commaPos);
 				break;
 			}
-			
+
 		}
 		System.out.println("SW95 commaPos" + commaPos);
 		String searchLocation = "";
 		System.out.println(commaPos);
 		System.out.println(location.length());
-		if ( commaPos != location.length() )
+		if (commaPos != location.length())
 			searchLocation = location.substring(0, commaPos);
 		else
 			searchLocation = location;
@@ -261,10 +263,10 @@ public class ShowWrapperAction extends Action {
 			List<Tweetlist> tl = new ArrayList<Tweetlist>();
 			List<Status> tweets = null;
 			// try {
-			// String s[]=desc.split("#");
+			 String s[]=desc.split("#");
 
-			String k = "#dance#dinner";
-			String s[] = k.split("#");
+			//String k = "#dance#dinner";
+			//String s[] = k.split("#");
 			String c = "";
 			for (String b : s)
 				c = c + " " + b;
@@ -280,23 +282,25 @@ public class ShowWrapperAction extends Action {
 				tweets = result.getTweets();
 				// System.out.println();
 				for (Status tweet : tweets) {
-					if (i > 25)
+					if (i > 20)
 						break;
 					Tweetlist ll = new Tweetlist();
-					ll.setUserScreenName(tweet.getUser().getScreenName());
 					String ut = tweet.getText();
-					int j = ut.indexOf("http://");
-					ut = ut.substring(0, i);
-					System.out.println(ut);
-					ll.setUserTweet(ut);
-					// tweetlistDAO.create(ll);
-					tl.add(ll);
-					i++;
+					// int j = ut.indexOf("http://");
+					// ut=ut.substring(0, 40);
+					// System.out.println(ut);
+					if (!ut.contains("http")) {
+						ll.setUserScreenName(tweet.getUser().getScreenName());
+						ll.setUserTweet(ut);
+						// tweetlistDAO.create(ll);
+						tl.add(ll);
+						i++;
+					}
 					// tl=tweetlistDAO.getTweets();
 					System.out.println("@" + tweet.getUser().getScreenName()
 							+ " - " + tweet.getText());
 				}
-				if (i > 25)
+				if (i > 20)
 					break;
 
 				System.out.println("Checking tweets fetch");
@@ -351,8 +355,8 @@ public class ShowWrapperAction extends Action {
 
 		BufferedReader br = new BufferedReader(new InputStreamReader(
 				uc.getInputStream()));
-		BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
-				filePath)));
+		BufferedWriter bw = new BufferedWriter(new FileWriter(
+				new File(filePath)));
 
 		String nextline;
 		String[] servers = new String[count];
@@ -499,8 +503,7 @@ public class ShowWrapperAction extends Action {
 
 			BufferedReader br = new BufferedReader(new InputStreamReader(
 					ucs[m].getInputStream()));
-			String newFileName = String.format(
-					"Photo_%s.xml", ids[m]);
+			String newFileName = String.format("Photo_%s.xml", ids[m]);
 			BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
 					newFileName)));
 
@@ -520,8 +523,7 @@ public class ShowWrapperAction extends Action {
 		for (int m = 0; m < count; m++) {
 
 			// System.out.println(ids[m]);
-			String infoFileName = String.format(
-					"Photo_%s.xml", ids[m]);
+			String infoFileName = String.format("Photo_%s.xml", ids[m]);
 			String[] temp = new String[Integer.parseInt(per_page)];
 			int tag_num = 0;
 

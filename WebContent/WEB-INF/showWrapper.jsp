@@ -128,11 +128,45 @@ $(document).ready(function() {
 	  </div>
 </c:forEach>
 
-<c:forEach var="twt" items="${Tweetlist}">    
-	   <div class="grid">
+<%
+	int j = 0;
+	//for(; i < 25;i++)  {
+				
+			
+%>
+ <c:forEach var="twt" items="${Tweetlist}">    
+	   	<%if(j % 3 == 0) {%>
+         	   
+	   <div class="grid" style="background-color:#E0E6F8;">
 	  <strong>${twt.userScreenName} </strong> 
 	  <strong>${twt.userTweet}</strong>
       </div>
+      
+      	<%j++;} %>
+    <%  if(j %2 == 0) {%>
+	   
+	   <div class="grid" style="background-color:#F7D358;">
+	  <strong>${twt.userScreenName}</strong> 
+	  <strong>${twt.userTweet}</strong>
+      </div>
+      
+      	<%j++;} %>
+    <% if(j % 5 == 0) {%>
+	   
+	   <div class="grid" style="background-color:#E1F5A9;">
+	  <strong>${twt.userScreenName} </strong> 
+	  <strong>${twt.userTweet}</strong>
+      </div>
+      
+      	<%j++;} %>
+    
+      
+	   <div class="grid" style="background-color:#A9E2F3;">
+	  <strong>${twt.userScreenName} </strong> 
+	  <strong>${twt.userTweet}</strong>
+      </div>
+    <% j++;%>
+
 </c:forEach>
 <!----> 
 </div>
