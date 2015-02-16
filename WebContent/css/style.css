@@ -90,7 +90,7 @@ section {
 
 .well{
 	font-family: 'Open Sans', sans-serif;
-	 background: url(../images/blue.jpg) no-repeat center center;
+	 background: AliceBlue ;
 	font-size: 14px;
 	color: black;
 	font-weight: normal;
@@ -100,7 +100,7 @@ section {
 
     padding:20px;
 	left: 50%;
-	margin-left: 19em; /*set to a negative number 1/2 of your width*/
+	margin-left: 21em; /*set to a negative number 1/2 of your width*/
 }
 
 /*CLASS TO FORMAT TEXT*/

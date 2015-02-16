@@ -34,7 +34,7 @@
       // draws it.
       function drawChart() {
     	   var data = google.visualization.arrayToDataTable([
-    	                                             	  	['Photo Title',          'Number of "like" click']
+    	                                             	  	['Photo Title',          'Number of People in Favor of This Photo']
     	                                             	    <c:forEach  var="photoFavors" items="${photoFavors}"> 
     	                                             	    ,['${photoFavors.title}', ${photoFavors.count_Like}]
     	                                             	    </c:forEach>
@@ -42,11 +42,11 @@
     	                                             	  
     	   
     	   var options = {
-    	      title: 'Top 5 "LIKE" Click Photos',
+    	      title: 'Top 5 "LIKE" Photos',
     	      width: 1000,
     	      height: 563,
     	      hAxis: {
-    	      title: 'Number of "like" click',
+    	      title: 'Number of People in Favor of This Photo',
     	      minValue: 0
     	       },
     	      vAxis: {
@@ -64,16 +64,21 @@
     
 <div class="container">
 <br>
-<h3><strong><font face="arial" color="teal">${location} "${tag}" Tag Analysis</font></strong></h3>
-<h3><strong><font face="arial" color="teal">Top 5 "LIKE" Click Photos</font></strong></h3>
+
+<br>
+<h2 align="center"><strong><font face="lucida handwriting" color="crimson">Top 5 "LIKE" Photos</font></strong></h2>
+<h3 align="center"><strong><font face="comic sans MS" color="teal">at ${location}<br>of "${tag}" Tag</font></strong></h3>
 
 <div id="chart_div"></div>
   <c:forEach var="photoFavors" items="${photoFavors}">  
-  <p><strong>Number of "Like" Click: </strong><c:out value = '${photoFavors.count_Like}' escapeXml='true' /></p>
-  <p><strong>Photo Title: </strong><c:out value = '${photoFavors.title}' escapeXml='true' /></p>   
+  <p><strong><font face="comic sans MS" color="teal"
+				size="3">Number of "Like" Click: </font></strong><strong><font face="arial" color="black" size="3"><c:out value = '${photoFavors.count_Like}' escapeXml='true' /></font></strong></p>
+  <p><strong><font face="comic sans MS" color="teal"
+				size="3">Photo Title: </font></strong><strong><font face="arial" color="black" size="3"><c:out value = '${photoFavors.title}' escapeXml='true' /></font></strong></p>
   
-  <p><strong>Click to View Photo: </strong><a href= "javascript:urlClick('${photoFavors.url}', 'viewAnalysis.do')">
-       					<c:out value = '${photoFavors.url}' escapeXml='true' /></a>
+  <p><strong><font face="comic sans MS" color="teal"
+				size="3">Click to View Photo: </font></strong><strong><font face="arial" color="black" size="3"><a href= "javascript:urlClick('${photoFavors.url}', 'viewAnalysis.do')">
+       					<c:out value = '${photoFavors.url}' escapeXml='true' /></a></font></strong></p>
   
   	</br>
   	</br>

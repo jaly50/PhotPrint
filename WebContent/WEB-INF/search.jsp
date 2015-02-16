@@ -30,7 +30,7 @@
 				<font face="comic sans MS" color="white"> Please input tags:
 				</font><input type="text" name="description" value="" style="color: black" />
 			</h4>
-
+		<br>
 			<h4 style="margin-left: 680px">
 				<input class="btn btn-default" type="submit" name="button"
 					value="Search!" style="font-family: comic sans MS" />

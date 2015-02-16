@@ -16,21 +16,24 @@
 		<div class="well">
 			<!-- Form Name -->
 			<div class="text-center">
-			<h3 style="font-family: 'Lucida Console', Monaco, monospace;">Upload tweet</h3></div>
+			<h2 align="center"><strong><font face="Browallia New" color = "black">Upload Photo</font></strong></h3> 
+			<br>
+			<h4 align="center"><strong><font face="lucida handwriting" color = "black">Your photo will also be uploaded to Twitter</font></strong></h3> 
 			<hr>
 			<input id="fileupload" type="file" name="files[]" data-url="upload"
 				multiple>
 
 			<h5 style="text-align: center">
+			
 				<i style="color: #ccc"><small>Max File Size: 2 Mb - 5
 						Files maximum</small></i>
 			</h5>
 
 			<table id="uploaded-files" class="table">
 				<tr>
-					<th>File Name</th>
-					<th>File Size</th>
-					<th>File Type</th>
+					<th><p align="center"><strong><font face="arial" color = "black" size="3">File Name</font></strong></th>
+					<th><p align="center"><strong><font face="arial" color = "black" size="3">File Size</font></strong></th>
+					<th><p align="center"><strong><font face="arial" color = "black" size="3">File Type</font></strong></th>
 
 				</tr>
 			</table>
@@ -39,7 +42,8 @@
 
 				<!-- Textarea -->
 				<div class="form-group">
-					<label class=" control-label" for="textarea">Tweet Post</label>
+				<p align="center"><strong><font face="lucida handwriting" color = "black" size="3">What do you want to say?</font></strong>
+					
 					<div class="">
 						<textarea class="form-control" id="textarea" name="description"
 							placeholder="Share your life today! You can add tags here like this. #tag #happy">${description}</textarea>
@@ -48,7 +52,8 @@
 
 				<!-- Text input-->
 				<div class="form-group">
-					<label class=" control-label" for="textinput">Location</label>
+				<p align="center"><strong><font face="lucida handwriting" color = "black" size="3">Where are you?</font></strong>
+					
 					<div class="">
 						<input id="searchPlace" type="text" name="location"
 							placeholder="Pittsburgh" value="${location}"

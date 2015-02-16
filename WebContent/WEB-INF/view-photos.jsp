@@ -5,8 +5,10 @@
 </div>
 </br>
 </br>
+<div id="home">
+	<div class="overlay">
 <div class="container">
-<h3 align="center"> <strong><font face="arial" color="teal">${user.userName} said &quot;${description}&quot; in ${location}</font></strong> 
+<h2 align="center"> <strong><font face="lucida handwriting" color="white">${user.userName} <br><br>  at ${location}, said "${description}" </font></strong> 
    </h3>       	  	
 </br>
 </br>
@@ -17,5 +19,7 @@
 </div>
 
  <div class="clearfix"> </div>
+</div>
+</div>
 </div>
 <jsp:include page="template-bottom.jsp" />

@@ -58,12 +58,17 @@
     
 <div class="container">
   <br>
-  <h3><strong><font face="arial" color="teal">${user.userName}'s PhotPrint Analysis</font></strong></h3>
+  <h2 align="center"><strong><font face="comic sans MS" color="teal">${user.userName} has been to</font></strong></h2>
+  <br>
+  <c:forEach var="locationsData" items="${locationsData}">  
+  <p align="center"><strong><font face="lucida handwriting" color = "black" size="3"><c:out value = '${locationsData.location}' escapeXml='true' /></font></strong>  
+  </c:forEach>
+  
   <!--Div that will hold the pie chart-->
     <div id="chart_div"></div>
   <c:forEach var="locationsData" items="${locationsData}">  
    
-   <h4> <strong><font face="arial" color="teal">${locationsData.location} &nbsp&nbsp&nbsp&nbsp
+   <h4> <strong><font face="comic sans MS" color="teal">${locationsData.location} &nbsp&nbsp&nbsp&nbsp
     Number of Photos: ${locationsData.number}  </font></strong> 
    </h4>       	  	
   	<form action="viewAnalysisDetail.do" method="POST">  
@@ -84,7 +89,7 @@
     </tbody>
     
   </table>
-		<h4 align="center"><input type="submit" name="button" value="View Tag Analysis"/></h4>
+		<h4 align="center"><input type="submit" name="button" value="View Tag Analysis" style="font-family: comic sans MS"/></h4>
   	</form> 
   	</br>
   	</br>
