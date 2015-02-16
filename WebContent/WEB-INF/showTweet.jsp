@@ -1,4 +1,5 @@
 <jsp:include page="template-top.jsp" />
+<jsp:include page="error-list.jsp" />
 <div id="home">
 	<div class="overlay">
 		<div style="margin-left: 23em;">

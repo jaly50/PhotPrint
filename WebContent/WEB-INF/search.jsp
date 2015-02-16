@@ -3,7 +3,6 @@
 	src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
 <script src="js/place.js"></script>
 
-<jsp:include page="error-list.jsp" />
 
 <div id="home">
 	<div class="overlay">

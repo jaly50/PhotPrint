@@ -122,8 +122,12 @@ public class UploadAction extends Action {
 
 			// Clean the cached files
 			FileUploadServlet.files = new LinkedList<FileMeta>();
+			
+			//Set successfuly message
+			String success ="You successfully posted tweet with photos to Twitter. View more similar pictures, Please click <a href=\"showWrapper.do\">here</a>.";
+			request.setAttribute("success", success);
 
-			return "showTweet.do";
+			return "showTweet.jsp";
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
 			return "manage.jsp";
