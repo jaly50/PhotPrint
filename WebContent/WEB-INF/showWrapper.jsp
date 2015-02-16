@@ -76,14 +76,18 @@ $(document).ready(function() {
 <form action="showWrapper.do" method="POST">
 <p><a href="showWrapper.do"><strong>Location: </strong></a>${location}</p>
 </form>
+<table>
 <form action="onlyPhotos.do" method="POST">
 			<input type="hidden" name="photos" value="Photos"/>
 			<input type="submit" class="btn btn-primary" role="button" value = "Photos"/>
 </form>
+&nbsp;
 <form action="onlyTweets.do" method="POST">
 			<input type="hidden" name="Tweets" value="Tweets"/>
 			<input type="submit" class="btn btn-primary" role="button" value = "Tweets"/>
 </form>
+</table>
+</br>
 <%
 	int i = 0;
 	for(; i < subString.length;i++)  {
@@ -125,14 +129,17 @@ $(document).ready(function() {
 		<c:forEach var="wt" items="${w.tags}"> 
 				<strong>${wt}</strong>
 		</c:forEach>
+		<table>
 		<form action="like.do" method="POST">
 			<input type="hidden" name="photo" value="${w.photo}"/>
 			<input type="submit" class="btn btn-primary" role="button" value = "Like"/>${w.count_like}
 		</form>
+		&nbsp;
 		<form action="dislike.do" method="POST">
 			<input type="hidden" name="photo" value="${w.photo}"/>
 			<input type="submit" class="btn btn-danger" role="button" value = "Dislike"/>${w.count_dislike}
 		</form>
+		</table>
 	  </div>
 </c:forEach>
 
