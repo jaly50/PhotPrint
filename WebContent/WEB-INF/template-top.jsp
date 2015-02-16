@@ -47,6 +47,7 @@
 					<li><a href="manage.do">UPLOAD</a></li>
 					<li><a href="viewPhotPrint.do">ANALYSIS</a></li>
 					<li><a href="search.do">SEARCH</a></li>
+					<li><a href="showTweet.do">MyTwitter</a></li>
 				</ul>
 				
 			</div>

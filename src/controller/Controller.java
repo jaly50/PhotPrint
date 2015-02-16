@@ -43,6 +43,7 @@ public class Controller extends HttpServlet {
         Action.add(new showTagsAction(model));
         Action.add(new LikeAction(model));
         Action.add(new DislikeAction(model));
+        Action.add(new ShowTweetAction(model));
         
     }
 

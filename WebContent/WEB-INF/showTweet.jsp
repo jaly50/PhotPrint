@@ -1,6 +1,13 @@
+<jsp:include page="template-top.jsp" />
+<div id="home">
+	<div class="overlay">
+		<div style="margin-left: 23em;">
 <a class="twitter-timeline" data-dnt="true"
-	href="https://twitter.com/jiali_chen"
-	data-widget-id="567389098265296896">Tweets by @jiali_chen</a>
+	href=${twitter}
+	data-widget-id="567389098265296896">Tweets by @${user.userName}</a>
+	</div>
+	</div>
+	</div>
 <script>
 	!function(d, s, id) {
 		var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/
@@ -13,3 +20,4 @@
 		}
 	}(document, "script", "twitter-wjs");
 </script>
+<jsp:include page="template-bottom.jsp" />
