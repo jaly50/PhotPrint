@@ -14,8 +14,8 @@ public class Location {
 		try {
 			double[] data = GeoInfo.getGeoCode(photo.getLocation());
 			System.out.println(data);
-			lat = 57.4755555;
-			lng = -132.3597222;
+			lat = data[0];
+			lng = data[1];
 			location = photo.getLocation();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
