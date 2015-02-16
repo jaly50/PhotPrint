@@ -124,7 +124,7 @@ public class UploadAction extends Action {
 			FileUploadServlet.files = new LinkedList<FileMeta>();
 			
 			//Set successfuly message
-			String success ="You successfully posted tweet with photos to Twitter. View more similar pictures, Please click <a href=\"showWrapper.do\">here</a>.";
+			String success ="You successfully posted tweet with photos to Twitter. <br/>View more similar pictures, Please click <a href=\"showWrapper.do\">here</a>.";
 			request.setAttribute("success", success);
 
 			return "showTweet.jsp";

@@ -15,7 +15,7 @@
     String success =  (String)request.getAttribute("success");
 	if (success != null && success.length() > 0) {
 		out.println("<div class=\"alert alert-success\" role=\"alert\"><div class=\"text-center\">");
-		out.println(success);
+		out.println("<h3>"+success+"</h3>");
 
 		out.println("</div></div>");
 	}
