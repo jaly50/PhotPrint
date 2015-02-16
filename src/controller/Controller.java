@@ -44,6 +44,8 @@ public class Controller extends HttpServlet {
         Action.add(new LikeAction(model));
         Action.add(new DislikeAction(model));
         Action.add(new ShowTweetAction(model));
+        Action.add(new OnlyPhotosAction(model));
+        Action.add(new OnlyTweetsAction(model));
         
     }
 

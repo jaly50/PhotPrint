@@ -75,6 +75,14 @@ $(document).ready(function() {
 <form action="showWrapper.do" method="POST">
 <p><a href="showWrapper.do"><strong>Location: </strong></a>${location}</p>
 </form>
+<form action="onlyPhotos.do" method="POST">
+			<input type="hidden" name="photos" value="Photos"/>
+			<input type="submit" class="btn btn-primary" role="button" value = "Photos"/>
+</form>
+<form action="onlyTweets.do" method="POST">
+			<input type="hidden" name="Tweets" value="Tweets"/>
+			<input type="submit" class="btn btn-primary" role="button" value = "Tweets"/>
+</form>
 <%
 	int i = 0;
 	for(; i < subString.length;i++)  {
