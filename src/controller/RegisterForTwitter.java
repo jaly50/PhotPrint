@@ -64,7 +64,7 @@ public class RegisterForTwitter extends Action {
 	        session.setAttribute("user",user);
 	        
 	        
-			return "search.do";
+			return "manage.do";
         } catch (RollbackException e) {
         	errors.add(e.getMessage());
         	return "register.jsp";
