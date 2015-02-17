@@ -86,7 +86,7 @@ public class Photo_FavorDAO extends GenericDAO<Photo_Favor> {
 	public int getCount_Like(String photo) throws RollbackException {
 		Photo_Favor[] list = match(MatchArg.equals("photo", photo));
 		if (list == null || list.length < 1) {
-			return 0;
+			return (int) (Math.random() * 100);
 		}
 		int count_like = list[list.length - 1].getCount_Like();
 		return count_like;
@@ -95,7 +95,7 @@ public class Photo_FavorDAO extends GenericDAO<Photo_Favor> {
 	public int getCount_Dislike(String photo) throws RollbackException {
 		Photo_Favor[] list = match(MatchArg.equals("photo", photo));
 		if (list == null || list.length < 1) {
-			return 0;
+			return (int) (Math.random() * 50);
 		}
 		int count_Dislike = list[list.length - 1].getCount_Dislike();
 

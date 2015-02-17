@@ -69,7 +69,7 @@ public class ShowWrapperAction extends Action {
 
 	static String apiKey = "b64b6e7af8762bd7b36eb3efe360fbf0";
 	static String secret = "5afa0fdb4d420d3d";
-	static String per_page = "5";
+	static String per_page = "15";
 	static String filePath = "searchPhoto.xml";
 	static int tagNum = 0;
 	static String[] photo;
