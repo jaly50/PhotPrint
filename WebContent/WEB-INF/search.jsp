@@ -11,11 +11,11 @@
 				size="8">Hello, ${user.userName}!</font></strong>
 		</h1>
 		<h3 align="center">
-			<strong><font face="lucida handwriting" color="AliceBlue">Where
+			<strong><font face="arial" color="AliceBlue">Where
 					do you want to travel to?</font></strong>
 		</h3>
 		<h4 align="center">
-			<strong><font face="lucida handwriting" color="AliceBlue">Type
+			<strong><font face="arial" color="AliceBlue">Type
 					in the location and tags, we will show the information you
 					need!</font></strong>
 		</h4>

@@ -18,7 +18,7 @@
 			<div class="text-center">
 			<h2 align="center"><strong><font face="Browallia New" color = "black">Upload Photo</font></strong></h3> 
 			<br>
-			<h4 align="center"><strong><font face="lucida handwriting" color = "black">Your photo will also be uploaded to Twitter</font></strong></h3> 
+			<h4 align="center"><strong><font face="arial" color = "black">Your photo will also be uploaded to Twitter</font></strong></h3> 
 			<hr>
 			<input id="fileupload" type="file" name="files[]" data-url="upload"
 				multiple>
@@ -42,7 +42,7 @@
 
 				<!-- Textarea -->
 				<div class="form-group">
-				<p align="center"><strong><font face="lucida handwriting" color = "black" size="3">What do you want to say?</font></strong>
+				<p align="center"><strong><font face="arial" color = "black" size="3">What do you want to say?</font></strong>
 					
 					<div class="">
 						<textarea class="form-control" id="textarea" name="description"
@@ -52,7 +52,7 @@
 
 				<!-- Text input-->
 				<div class="form-group">
-				<p align="center"><strong><font face="lucida handwriting" color = "black" size="3">Where are you?</font></strong>
+				<p align="center"><strong><font face="arial" color = "black" size="3">Where are you?</font></strong>
 					
 					<div class="">
 						<input id="searchPlace" type="text" name="location"

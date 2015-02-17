@@ -8,7 +8,7 @@
 <div id="home">
 	<div class="overlay">
 <div class="container">
-<h2 align="center"> <strong><font face="lucida handwriting" color="white">${user.userName} <br><br>  at ${location}, said "${description}" </font></strong> 
+<h2 align="center"> <strong><font face="comic sans MS" color="white">${user.userName} <br><br>  at ${location}, said "${description}" </font></strong> 
    </h3>       	  	
 </br>
 </br>

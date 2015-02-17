@@ -66,7 +66,7 @@
 <br>
 
 <br>
-<h2 align="center"><strong><font face="lucida handwriting" color="crimson">Top 5 "LIKE" Photos</font></strong></h2>
+<h2 align="center"><strong><font face="arial" color="IndianRed">Top 5 "LIKE" Photos</font></strong></h2>
 <h3 align="center"><strong><font face="comic sans MS" color="teal">at ${location}<br>of "${tag}" Tag</font></strong></h3>
 
 <div id="chart_div"></div>

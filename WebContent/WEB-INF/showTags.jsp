@@ -71,9 +71,9 @@ $(document).ready(function() {
 <!-- Content -->
 <section id="wrapper">
 <hgroup>
-<h2>PhotPrint</h2>
+<p align="center"><strong><font face="comic sans MS" color="IndianRed" size="6">Search Result for: </font></strong></h2>
+<p align="center"><strong><font face="comic sans MS" color="Black" size= "5"><a href="showWrapper.do"><strong>${location }</strong></a></font></strong></h1>
 <form action="showWrapper.do" method="POST">
-<p><a href="showWrapper.do"><strong>Location: </strong></a>${location}</p>
 </form>
 <table>
 <form action="onlyPhotos.do" method="POST">

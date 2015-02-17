@@ -58,10 +58,10 @@
     
 <div class="container">
   <br>
-  <h2 align="center"><strong><font face="comic sans MS" color="teal">${user.userName} has been to</font></strong></h2>
+  <h2 align="center"><strong><font face="arial" color="teal">${user.userName} has been to</font></strong></h2>
   <br>
   <c:forEach var="locationsData" items="${locationsData}">  
-  <p align="center"><strong><font face="lucida handwriting" color = "black" size="3"><c:out value = '${locationsData.location}' escapeXml='true' /></font></strong>  
+  <p align="center"><strong><font face="comic sans MS" color = "black" size="3"><c:out value = '${locationsData.location}' escapeXml='true' /></font></strong>  
   </c:forEach>
   
   <!--Div that will hold the pie chart-->

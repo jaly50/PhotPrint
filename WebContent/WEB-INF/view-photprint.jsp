@@ -90,12 +90,12 @@ google.maps.event.addDomListener(window, 'load', initialize);
 <!-- This is a very simple parallax effect achieved by simple CSS 3 multiple backgrounds, made by http://twitter.com/msurguy -->
 
 <div class="container">
-<h2 align="center"><strong><font face="lucida handwriting" color="teal">${user.userName}'s PhotPrint&nbsp&nbsp&nbsp&nbsp</font></strong></h2>
+<h2 align="center"><strong><font face="arial" color="teal">${user.userName}'s PhotPrint&nbsp&nbsp&nbsp&nbsp</font></strong></h2>
 <h3 align="center"><strong><font face="comic sans MS" color="teal"><a href="viewAnalysis.do">Analyze the number places ${user.userName} has been</a></font></strong></h1>
   </br>
   <c:forEach var="myLocations" items="${myLocations}">   
   <form action="viewPhotos.do" method="POST">
-  			<p align="center"><strong><font face="lucida handwriting" color = "black" size="3"><c:out value = '${myLocations.location}' escapeXml='true' /></font></strong>                		
+  			<p align="center"><strong><font face="comic sans MS" color = "black" size="3"><c:out value = '${myLocations.location}' escapeXml='true' /></font></strong>                		
        		&nbsp&nbsp&nbsp&nbsp<strong><a href= "viewPhotos.do?location=${myLocations.location}">View Photos</a></strong>
   </form> 
   </c:forEach>   	
