@@ -524,6 +524,7 @@ public class OnlyPhotosAction extends Action {
 		for (int m = 0; m < count; m++) {
 
 			// System.out.println(ids[m]);
+			if (ids[m]==null) continue;
 			String infoFileName = String.format("Photo_%s.xml", ids[m]);
 			String[] temp = new String[Integer.parseInt(per_page)];
 			int tag_num = 0;

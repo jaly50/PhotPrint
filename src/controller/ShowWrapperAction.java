@@ -38,7 +38,6 @@ import org.w3c.dom.NodeList;
 import formbeans.ShowWrapper;
 import databeans.Photo_Favor;
 import databeans.WrapperTable;
-
 import twitter4j.Query;
 import twitter4j.QueryResult;
 import twitter4j.Status;
@@ -98,27 +97,33 @@ public class ShowWrapperAction extends Action {
 		String description = (String) session.getAttribute("description");
 		// String description = "#computer #electronic";
 		String location = (String) session.getAttribute("location");
-		System.out.println("SW84" + location);
-		System.out.println("SW85" + location.length());
+
 		int commaPos = 0;
 		// String location = "California";
 		for (; commaPos < location.length(); commaPos++) {
-			System.out.println("SW89" + commaPos);
+
 			if (location.charAt(commaPos) == ',') {
-				System.out.println("SW91" + commaPos);
+			
 				break;
 			}
 
 		}
-		System.out.println("SW95 commaPos" + commaPos);
+		
 		String searchLocation = "";
-		System.out.println(commaPos);
-		System.out.println(location.length());
+		
 		if (commaPos != location.length())
 			searchLocation = location.substring(0, commaPos);
 		else
 			searchLocation = location;
-		System.out.println("SWA 118: " + searchLocation);
+		
+		String[] myTags = description.split("#");
+		for (String tag: myTags) {
+			if (tag.indexOf(" ")>=0) {
+				tag=tag.substring(0,tag.indexOf(" "));
+			}
+		}
+
+		
 		int countTags = 0;
 		int[] tagPosition = new int[10];
 		Arrays.fill(tagPosition, 0);
@@ -179,19 +184,23 @@ public class ShowWrapperAction extends Action {
 				for (int m = 0; m < subString.length; m++) {
 					searchPhoto(searchLocation, subString[m]);
 					// set WrapperTable
+				
 					System.out.println("The size of tag is: " + tags.size());
 					int len = Math.min(tags.size(), photo.length);
-					for (int i = 0; i < photo.length; i++) {
+					for (int i = 0; i < photo.length; i++) 
+					if (photo[i]!=null){
 						WrapperTable wTableRow = new WrapperTable();
+						System.out.println("photo i is: "+photo[i]);
 						wTableRow.setPhoto(photo[i]);
 						wTableRow.setUrl(url[i]);
 						wTableRow.setTitle(title[i]);
-						wTableRow.setTags(tags.get(i));
+						wTableRow.setTags(myTags);
 						wTableRow.setCount_like(count_like[i]);
 						wTableRow.setCount_dislike(count_dislike[i]);
 						WrapperTable.add(wTableRow);
 
 						Photo_Favor pTableRow = new Photo_Favor();
+						
 						pTableRow.setPhoto(photo[i].toString().trim());
 						pTableRow.setTitle(title[i].trim());
 						pTableRow.setUrl(url[i].trim());
@@ -390,6 +399,8 @@ public class ShowWrapperAction extends Action {
 						Attribute attribute = (Attribute) iterator.next();
 						QName name = attribute.getName();
 						String value = attribute.getValue();
+						if (value.equals("null"))
+						   continue;
 						if ((name.toString()).equals("server")) {
 							servers[i] = value;
 						}
@@ -429,8 +440,12 @@ public class ShowWrapperAction extends Action {
 			}
 
 		}
-
+		if (ids!=null) 
+			if (ids.length >0)
+				if (ids[0]!=null){
+			System.out.println("we get the ids: "+Arrays.toString(ids));
 		getPhotoInfo(ids, secrets);
+		}
 	}
 
 	/********************************************************************************/
@@ -466,6 +481,7 @@ public class ShowWrapperAction extends Action {
 						Attribute attribute = (Attribute) iterator.next();
 						QName name = attribute.getName();
 						String value = attribute.getValue();
+						if (value==null || value=="null") continue;
 						if ((name.toString()).equals("server")) {
 							servers[i] = value;
 						}
@@ -510,10 +526,17 @@ public class ShowWrapperAction extends Action {
 		}
 
 		// read photo files;
+		System.out.println("Get the photo ids: "+Arrays.toString(ids));
+		if (ids[0]==null || ids[0].equals("null")) {
+			System.out.println("ids 0 is null");
+			return;
+		}
 		for (int m = 0; m < photo.length; m++) {
 
-			// System.out.println(ids[m]);
+			 System.out.println("Ids m here is: "+ids[m]);
+			if (ids[m]==null ||ids[m].equals("null")) continue;
 			String infoFileName = String.format("Photo_%s.xml", ids[m]);
+			System.out.println("The info file Name: "+infoFileName);
 			String[] temp = new String[Integer.parseInt(per_page)];
 			int tag_num = 0;
 
@@ -544,6 +567,7 @@ public class ShowWrapperAction extends Action {
 			try {
 				DocumentBuilder builder = domFactory.newDocumentBuilder();
 				Document doc = builder.parse(infoFileName);
+				System.out.println("The document is: "+doc);
 				doc.getDocumentElement().normalize();
 
 				/*
