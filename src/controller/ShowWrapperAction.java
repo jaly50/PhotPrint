@@ -179,9 +179,9 @@ public class ShowWrapperAction extends Action {
 				for (int m = 0; m < subString.length; m++) {
 					searchPhoto(searchLocation, subString[m]);
 					// set WrapperTable
-					System.out.println("The size of tag is: "+ tags.size());
-					int len=Math.min(tags.size(), photo.length);
-					for (int i = 0; i < len; i++) {
+					System.out.println("The size of tag is: " + tags.size());
+					int len = Math.min(tags.size(), photo.length);
+					for (int i = 0; i < photo.length; i++) {
 						WrapperTable wTableRow = new WrapperTable();
 						wTableRow.setPhoto(photo[i]);
 						wTableRow.setUrl(url[i]);
@@ -265,10 +265,10 @@ public class ShowWrapperAction extends Action {
 			List<Tweetlist> tl = new ArrayList<Tweetlist>();
 			List<Status> tweets = null;
 			// try {
-			 String s[]=desc.split("#");
+			String s[] = desc.split("#");
 
-			//String k = "#dance#dinner";
-			//String s[] = k.split("#");
+			// String k = "#dance#dinner";
+			// String s[] = k.split("#");
 			String c = "";
 			for (String b : s)
 				c = c + " " + b;
@@ -330,19 +330,7 @@ public class ShowWrapperAction extends Action {
 		String method = "flickr.photos.search";
 		int count = Integer.parseInt(per_page);
 
-		/*
-		 * URLConnection uc = new URL(
-		 * "https://api.flickr.com/services/rest/?method=" + method +
-		 * "&api_key=" + apiKey + "&per_page=" + per_page + "&text=" +
-		 * text1).openConnection();
-		 */
-
-		/*
-		 * URLConnection uc = new URL(
-		 * "https://api.flickr.com/services/rest/?method=" + method +
-		 * "&api_key=" + apiKey + "&per_page=" + per_page + "&text=" + text1
-		 * +",+" + text2).openConnection();
-		 */
+		
 
 		URLConnection uc = new URL(
 				"https://api.flickr.com/services/rest/?method=" + method
@@ -567,11 +555,10 @@ public class ShowWrapperAction extends Action {
 				// get url
 				NodeList urlList = doc.getElementsByTagName("url");
 				Node urlNode = urlList.item(0);
-				if (urlNode==null) {
+				if (urlNode == null) {
 					url[m] = "https://www.flickr.com";
-				}
-				else
-				url[m] = urlNode.getTextContent();
+				} else
+					url[m] = urlNode.getTextContent();
 
 				// get title
 				NodeList titleList = doc.getElementsByTagName("title");
@@ -585,8 +572,12 @@ public class ShowWrapperAction extends Action {
 				NodeList tagsList = doc.getElementsByTagName("tag");
 				String[] tagsTemp = new String[3];
 				for (int tempRow = 0; tempRow < 3; tempRow++) {
-					Node tagNode = tagsList.item(tempRow);
-					tagsTemp[tempRow] = tagNode.getTextContent();
+					if (tagsList == null)
+						tagsTemp[tempRow] = "food";
+					else {
+						Node tagNode = tagsList.item(tempRow);
+						tagsTemp[tempRow] = tagNode.getTextContent();
+					}
 
 				}
 				tags.add(tagsTemp);
