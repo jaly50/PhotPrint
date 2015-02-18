@@ -179,7 +179,9 @@ public class ShowWrapperAction extends Action {
 				for (int m = 0; m < subString.length; m++) {
 					searchPhoto(searchLocation, subString[m]);
 					// set WrapperTable
-					for (int i = 0; i < photo.length; i++) {
+					System.out.println("The size of tag is: "+ tags.size());
+					int len=Math.min(tags.size(), photo.length);
+					for (int i = 0; i < len; i++) {
 						WrapperTable wTableRow = new WrapperTable();
 						wTableRow.setPhoto(photo[i]);
 						wTableRow.setUrl(url[i]);
@@ -520,7 +522,7 @@ public class ShowWrapperAction extends Action {
 		}
 
 		// read photo files;
-		for (int m = 0; m < count; m++) {
+		for (int m = 0; m < photo.length; m++) {
 
 			// System.out.println(ids[m]);
 			String infoFileName = String.format("Photo_%s.xml", ids[m]);
@@ -565,6 +567,10 @@ public class ShowWrapperAction extends Action {
 				// get url
 				NodeList urlList = doc.getElementsByTagName("url");
 				Node urlNode = urlList.item(0);
+				if (urlNode==null) {
+					url[m] = "https://www.flickr.com";
+				}
+				else
 				url[m] = urlNode.getTextContent();
 
 				// get title

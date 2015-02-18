@@ -38,7 +38,6 @@ import org.w3c.dom.NodeList;
 import formbeans.ShowWrapper;
 import databeans.Photo_Favor;
 import databeans.WrapperTable;
-
 import twitter4j.Query;
 import twitter4j.QueryResult;
 import twitter4j.Status;
@@ -179,7 +178,9 @@ public class OnlyPhotosAction extends Action {
 				for (int m = 0; m < subString.length; m++) {
 					searchPhoto(searchLocation, subString[m]);
 					// set WrapperTable
-					for (int i = 0; i < photo.length; i++) {
+					System.out.println("[Only photos action]The size of tag is: "+ tags.size());
+					int len=Math.min(tags.size(), photo.length);
+					for (int i = 0; i <len; i++) {
 						WrapperTable wTableRow = new WrapperTable();
 						wTableRow.setPhoto(photo[i]);
 						wTableRow.setUrl(url[i]);
