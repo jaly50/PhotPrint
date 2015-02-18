@@ -275,6 +275,11 @@ public class ShowWrapperAction extends Action {
 			List<Status> tweets = null;
 			// try {
 			String s[] = desc.split("#");
+			for (String tag: s) {
+				if (tag.indexOf(" ")>=0) {
+					tag=tag.substring(0,tag.indexOf(" "));
+				}
+			}
 
 			// String k = "#dance#dinner";
 			// String s[] = k.split("#");
