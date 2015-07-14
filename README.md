@@ -11,8 +11,9 @@ Visualized statistical data using Google Chart and provided locations of footpri
 
 
 # Introduction
-src/: back-end code with MVC architecture, connecting to SQL database.
+      src/: back-end code with MVC architecture, connecting to SQL database.
+
       Function implemented: Upload photos and tweets to Twitter; Search tweets from Twitter; Search photos from Flickr;
                         Visualize statistical data using Google Chart; provide locations of footprints with Google Map API
                         
-WebContent/WEB-INF/: Front-end code using JSP, CSS with Bootstrap framework.
+      WebContent/WEB-INF/: Front-end code using JSP, CSS with Bootstrap framework.
